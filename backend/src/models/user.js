@@ -47,8 +47,12 @@ userSchema.virtual('contra').set(function(contra){
     this.hash_contra = bcrypt.hashSync(contra, 10) //hasheamos la contraseña
 })
 
+userSchema.virtual("nombreCompleto").get(function(){
+    return `${this.nombre} ${this.apellido}`
+})
+
 userSchema.methods = {
-    authenticate: function(){
+    authenticate: function(contra){
         return bcrypt.compareSync(contra, this.hash_contra) //corroboramos la contraseña del usuario con bcrypt
     }
 }
