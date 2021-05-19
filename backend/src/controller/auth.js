@@ -2,6 +2,7 @@ const User = require("../models/user");
 const jwt = require("jsonwebtoken"); //creamos un token para manejar la sesión
 
 exports.signup = (req, res) => {
+
   User.findOne({ correo: req.body.correo }).exec((error, user) => {
     if (user)
       return res.status(400).json({
