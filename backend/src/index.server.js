@@ -1,7 +1,6 @@
 const express = require("express");
 const env = require("dotenv");
 const app = express(); //crea la app
-const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 //variable de entorno
 env.config();
@@ -9,6 +8,7 @@ env.config();
 //rutas
 const authRoutes = require('./routes/auth')
 const adminRoutes = require('./routes/admin/auth')
+const categoryRoutes = require('./routes/categoria')
 
 
 //conexion a mongo db
@@ -25,9 +25,10 @@ mongoose
     console.log("Conectado a la BD");
   });
 
-app.use(bodyParser());
+app.use(express.json());
 app.use('/api', authRoutes)
 app.use('/api', adminRoutes)
+app.use('/api', categoryRoutes)
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);

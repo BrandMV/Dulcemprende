@@ -38,7 +38,7 @@ exports.signin = (req, res, next) => {
     if (error) return res.status(400).json({ error });
     if (user) {
       if (user.authenticate(req.body.contra) && user.rol === 'admin') {
-        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ _id: user._id, rol: user.rol }, process.env.JWT_SECRET, {
           expiresIn: "2h",
         }); //dos horas de expiracion
         const { _id, nombre, apellido, correo, rol, nombreCompleto } = user;
