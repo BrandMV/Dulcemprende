@@ -1,13 +1,20 @@
 
 import React from 'react'
-import { Jumbotron } from 'react-bootstrap'
-import Layaut from '../../components/Diseño/Layout'
+import { Row, Col, Container } from 'react-bootstrap'
+import Layout from '../../components/Diseño/Layout'
+import './style.css'
 
 const Home = () => {
     return (
         <div>
-            <Layaut>
-                <Jumbotron style={{margin: '7rem'}} className="text-center" >
+            <Layout>
+              <Container fluid>
+              <Row>
+                    <Col md={2} className="sidebar" >lateral</Col>
+                    <Col md={10}  style={{marginLeft: 'auto'}}>container</Col>
+                </Row>
+              </Container>
+                {/* <Jumbotron style={{margin: '7rem'}} className="text-center" >
                     <h1>Bienvenido Administrador!</h1>
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis facere nulla rerum modi animi fugiat reprehenderit perferendis, et magnam unde praesentium autem nemo quis soluta, dolorem odio optio, sed iste.
@@ -16,8 +23,8 @@ const Home = () => {
                         Tempora itaque quis non magni, delectus animi assumenda voluptatibus rem ducimus hic nobis fugit laborum quae accusamus et pariatur quo dignissimos, dolores sunt deleniti! Deserunt necessitatibus distinctio quae ipsum voluptates?
                         Aspernatur adipisci, fugiat voluptates obcaecati consequuntur dolores praesentium dolore. Minima hic aliquid ut repellat quisquam et iste ipsum aliquam earum debitis. Iure nobis necessitatibus ut eaque quae repellendus dolore autem?
                     </p>
-                </Jumbotron>
-            </Layaut>
+                </Jumbotron> */}
+            </Layout>
         </div>
     )
 }

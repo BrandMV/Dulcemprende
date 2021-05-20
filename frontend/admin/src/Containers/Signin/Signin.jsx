@@ -6,7 +6,6 @@ import { login } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from 'react'
 import { Redirect } from "react-router-dom";
-import { isUserLoggedIn } from '../../actions'
 
 const Signin = () => {
   const [correo, setCorreo] = useState('')
@@ -15,13 +14,6 @@ const Signin = () => {
   const auth = useSelector(state => state.auth)
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    if(!auth.authenticate){
-      dispatch(isUserLoggedIn)
-    }
-    
-
-  }, [])
 
   const userLogin = (e) => {
 

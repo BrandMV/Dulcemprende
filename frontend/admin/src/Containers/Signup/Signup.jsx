@@ -1,32 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../components/Diseño/Layout";
 import { Container, Form, Row, Col, Button } from "react-bootstrap";
 import Input from "../../components/UI/Input/Input";
+import { Redirect } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { signup } from '../../actions'
 
 const Signup = () => {
+
+  
+
+  const auth = useSelector(state => state.auth)
+  const [nombre, setNombre] = useState('')
+  const [apellido, setApellido] = useState('')
+  const [correo, setCorreo] = useState('')
+  const [contra, setContra] = useState('')
+  const [error, setError] = useState('')
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
+
+  const userSignup = (e) =>{
+    e.preventDefault()
+    const user = {
+      nombre, apellido, correo, contra
+    }
+
+    dispatch(signup(user))
+  }
+
+  if(auth.authenticate){
+    return <Redirect to={`/`} />
+  }
+
+  if(user.loading){
+    return <p>Loading...</p>
+  }
+
+
   return (
     <Layout>
       <Container>
+        { user.message }
         <Row style={{ marginTop: "2rem" }}>
           <Col md={{ span: 6, offset: 3 }}>
-            <Form>
+            <Form onSubmit={userSignup}>
               <Row>
                 <Col md={6}>
                   <Input
                     label="Nombre"
                     placeholder="Nombre"
-                    value=""
+                    value={nombre}
                     type="text"
-                    onChange={() => {}}
+                    onChange={(e) => setNombre(e.target.value)}
                   />
                 </Col>
                 <Col md={6}>
                   <Input
                     label="Apellidos"
                     placeholder="Apellidos"
-                    value=""
+                    value={apellido}
                     type="text"
-                    onChange={() => {}}
+                    onChange={(e) => setApellido(e.target.value)}
                   />
                 </Col>
               </Row>
@@ -34,9 +68,9 @@ const Signup = () => {
                 <Input
                   label="Correo"
                   placeholder="Correo"
-                  value=""
+                  value={correo}
                   type="email"
-                  onChange={() => {}}
+                  onChange={(e) => setCorreo(e.target.value)}
                 />
               </Form.Group>
 
@@ -44,9 +78,9 @@ const Signup = () => {
                 <Input
                   label="Contraseña"
                   placeholder="Contraseña"
-                  value=""
+                  value={contra}
                   type="password"
-                  onChange={() => {}}
+                  onChange={(e) => setContra(e.target.value)}
                 />
               </Form.Group>
               <Button
