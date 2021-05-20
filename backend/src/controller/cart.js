@@ -11,22 +11,34 @@ exports.addItemToCart = (req, res) => {
       const product = req.body.cartItems.product;
       const item = cart.cartItems.find((c) => c.product == product);
 
+      let condition, update
       if (item) {
-        Cart.findOneAndUpdate(
-          { user: req.user._id, "cartItems.product": product },
-          {
-            $set: {
-              cartItems: {
-                ...req.body.cartItems,
-                quantity: item.quantity + req.body.cartItems.quantity,
-              },
-            },
+
+        condition = { "user": req.user._id, "cartItems.product": product }
+        update =    {
+          "$set": {
+            "cartItems.$": {
+              ...req.body.cartItems,
+              quantity: item.quantity + req.body.cartItems.quantity
+            }
           }
-        ).exec((error, _cart) => {
-          if (error) return res.status(400).json({ error });
-          if (cart) return res.status(201).json({ cart: _cart });
-        });
+        }
+
+      }else{
+        condition = { user: req.user._id}
+        update = {
+          "$push": {
+            "cartItems": req.body.cartItems
+          }
+        }
+        
       }
+      Cart.findOneAndUpdate(condition, update).exec((error, _cart) => {
+        if (error) return res.status(400).json({ error });
+        if (cart) return res.status(201).json({ cart: _cart });
+      });
+
+      
     } else {
       //si el carrito no existe creamos uno nuevo
       const cart = new Cart({

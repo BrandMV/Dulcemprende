@@ -11,8 +11,7 @@ const adminRoutes = require('./routes/admin/auth')
 const categoryRoutes = require('./routes/categoria')
 const productRoutes = require('./routes/product')
 const cartRoutes = require('./routes/cart')
-
-mongoose.set('useFindAndModify', false);
+const path = require('path')
 //conexion a mongo db
 mongoose
   .connect(
@@ -20,7 +19,8 @@ mongoose
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true
+      useCreateIndex: true,
+      useFindAndModify : false
     }
   )
   .then(() => {
@@ -28,6 +28,7 @@ mongoose
   });
 
 app.use(express.json());
+app.use('/public', express.static(path.join(__dirname, 'uploads')))
 app.use('/api', authRoutes)
 app.use('/api', adminRoutes)
 app.use('/api', categoryRoutes)

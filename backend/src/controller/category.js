@@ -27,7 +27,11 @@ exports.addCategory = (req, res) => {
 
     const categoryObj={
         nombre: req.body.nombre,
-        slug: slugify(req.body.nombre)
+        slug: slugify(req.body.nombre),
+    }
+
+    if(req.file){
+        categoryObj.categoryImage = process.env.API + '/public/' + req.file.filename
     }
     if(req.body.idpadre){
         categoryObj.idpadre = req.body.idpadre
