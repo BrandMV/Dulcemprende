@@ -4,13 +4,14 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Signup from "./Containers/Signup/Signup";
 import Signin from "./Containers/Signin/Signin";
 import Home from "./Containers/Home/Home";
+import PrivateRoute from "./components/HOC/PrivateRoute";
 
 function App() {
   return (
     <div>
       <Router>
         <Switch>
-          <Route path="/" exact component={Home} />
+          <PrivateRoute path="/" exact component={Home} />
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} />
         </Switch>

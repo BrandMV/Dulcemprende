@@ -12,6 +12,7 @@ const categoryRoutes = require('./routes/categoria')
 const productRoutes = require('./routes/product')
 const cartRoutes = require('./routes/cart')
 const path = require('path')
+const cors = require('cors')
 //conexion a mongo db
 mongoose
   .connect(
@@ -27,6 +28,7 @@ mongoose
     console.log("Conectado a la BD");
   });
 
+app.use(cors())
 app.use(express.json());
 app.use('/public', express.static(path.join(__dirname, 'uploads')))
 app.use('/api', authRoutes)
