@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
         default: 'user'
     },
     numero:{type: String},
-    foto:{tyoe: String}
+    foto:{type: String}
 }, {timestamps: true})
 
 userSchema.virtual('contra').set(function(contra){
