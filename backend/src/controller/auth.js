@@ -1,20 +1,24 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken"); //creamos un token para manejar la sesión
+const bcrypt = require('bcrypt')
+
 
 exports.signup = (req, res) => {
 
-  User.findOne({ correo: req.body.correo }).exec((error, user) => {
+  User.findOne({ correo: req.body.correo }).exec( async (error, user) => {
     if (user)
       return res.status(400).json({
         message: "Ya te has registrado. Prueba iniciando sesión!",
       });
 
     const { nombre, apellido, correo, contra } = req.body;
+    const hash_contra = await bcrypt.hash(contra, 10)
+
     const _user = new User({
       nombre,
       apellido,
       correo,
-      contra,
+      hash_contra,
       username: Math.random().toString(),
     });
 
