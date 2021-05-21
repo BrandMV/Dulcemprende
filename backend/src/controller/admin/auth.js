@@ -1,6 +1,7 @@
 const User = require("../../models/user");
 const jwt = require("jsonwebtoken"); //creamos un token para manejar la sesión
 const bcrypt = require('bcrypt')
+const shortid = require('shortid')
 
 exports.signup = (req, res) => {
   User.findOne({ correo: req.body.correo }).exec( async (error, user) => {
@@ -16,7 +17,7 @@ exports.signup = (req, res) => {
       apellido,
       correo,
       hash_contra,
-      username: Math.random().toString(),
+      username: shortid.generate(),
       rol: 'admin'
     });
 
