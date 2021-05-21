@@ -44,6 +44,7 @@ const Header = () => {
   return (
     <Navbar
       collapseOnSelect
+      fixed="top"
       expand="lg"
       bg="dark"
       variant="dark"

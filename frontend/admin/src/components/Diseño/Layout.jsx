@@ -20,7 +20,7 @@ const Layout = ({ children, sidebar }) => {
                       <li><NavLink to={`/orders`}>Ordenes</NavLink></li>
                   </ul>
               </Col>
-              <Col md={10}  style={{marginLeft: 'auto'}}>
+              <Col md={10}  style={{marginLeft: 'auto', paddingTop: '60px'}}>
                 {children}
               </Col>
           </Row>
