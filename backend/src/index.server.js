@@ -2,6 +2,8 @@ const express = require("express");
 const env = require("dotenv");
 const app = express(); //crea la app
 const mongoose = require("mongoose");
+const path = require('path')
+const cors = require('cors')
 //variable de entorno
 env.config();
 
@@ -11,8 +13,8 @@ const adminRoutes = require('./routes/admin/auth')
 const categoryRoutes = require('./routes/categoria')
 const productRoutes = require('./routes/product')
 const cartRoutes = require('./routes/cart')
-const path = require('path')
-const cors = require('cors')
+const initialDataRoutes = require('./routes/admin/initialData')
+
 //conexion a mongo db
 mongoose
   .connect(
@@ -36,6 +38,7 @@ app.use('/api', adminRoutes)
 app.use('/api', categoryRoutes)
 app.use('/api', productRoutes)
 app.use('/api', cartRoutes)
+app.use('/api', initialDataRoutes)
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);

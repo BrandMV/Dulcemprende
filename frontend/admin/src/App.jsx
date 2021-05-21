@@ -6,11 +6,10 @@ import Home from "./Containers/Home/Home";
 import PrivateRoute from "./components/HOC/PrivateRoute";
 import {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { isUserLoggedIn, getAllCategory } from './actions'
+import { isUserLoggedIn, getInitialData } from './actions'
 import Products from "./Containers/Products/Products";
 import Ordenes from "./Containers/Ordenes/Ordenes";
 import Category from "./Containers/Category/Category";
-
 
 function App() {
 
@@ -20,7 +19,7 @@ function App() {
     if(!auth.authenticate){
       dispatch(isUserLoggedIn())
     }
-    dispatch(getAllCategory());
+    dispatch(getInitialData());
 
   }, [])
   
