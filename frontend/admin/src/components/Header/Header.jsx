@@ -15,7 +15,7 @@ const Header = () => {
 
   const renderLoggedInLinks = () => {
     return (
-      <Nav style={{ marginLeft: "35rem" }}>
+      <Nav style={{ margin: 'auto'}}>
         <li className="nav-item">
           <span className="nav-link" onClick={logout} >Cerrar Sesión</span>
         </li>
@@ -25,7 +25,7 @@ const Header = () => {
 
   const renderNonLoggedInLinks = () =>{
     return(
-      <Nav style={{ marginLeft: "35rem" }}>
+      <Nav style={{ margin: 'auto' }}>
       {/* <Nav.Link href="#deets">Inciar Sesión</Nav.Link> */}
       <li className="nav-item">
         <NavLink to="signup" className="nav-link">

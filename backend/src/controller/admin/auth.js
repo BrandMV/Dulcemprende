@@ -39,9 +39,10 @@ exports.signin = (req, res, next) => {
     if (user) {
       if (user.authenticate(req.body.contra) && user.rol === 'admin') {
         const token = jwt.sign({ _id: user._id, rol: user.rol }, process.env.JWT_SECRET, {
-          expiresIn: "2h",
+          expiresIn: "1d",
         }); //dos horas de expiracion
         const { _id, nombre, apellido, correo, rol, nombreCompleto } = user;
+        res.cookie('token', token, {expiresIn: '1d'})
         res.status(200).json({
           token,
           user: {
@@ -69,4 +70,11 @@ exports.requireSignin = (req, res, next) => {
     const user = jwt.verify(token, process.env.JWT_SECRET)
     req.user = user;
     next()
+}
+
+exports.signout = (req, res) => {
+  res.clearCookie('token')
+  res.status(200).json({
+    message: 'Cerro sesión axitosamente'
+  })
 }
