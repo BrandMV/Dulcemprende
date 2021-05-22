@@ -1,6 +1,5 @@
 import React from "react";
-import {  Modal, Button } from "react-bootstrap";
-
+import { Modal, Button } from "react-bootstrap";
 
 const NewModal = (props) => {
   return (
@@ -8,13 +7,18 @@ const NewModal = (props) => {
       <Modal.Header closeButton>
         <Modal.Title>{props.modalTittle}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        {props.children}
-      </Modal.Body>
+      <Modal.Body>{props.children}</Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={props.handleClose}>
-          Listo
-        </Button>
+        {props.buttons ?
+          props.buttons.map((btn, index) => 
+            <Button key={index} variant={btn.color} onClick={btn.onClick}>
+              {btn.label}
+            </Button>
+          ):
+          <Button  variant="primary" onClick={props.handleClose}>
+              Listo
+            </Button>
+          }
       </Modal.Footer>
     </Modal>
   );
