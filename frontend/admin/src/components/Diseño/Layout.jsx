@@ -15,6 +15,7 @@ const Layout = ({ children, sidebar }) => {
               <Col md={2} className="sidebar" >
                   <ul>
                       <li><NavLink exact to={`/`}>Inicio</NavLink></li>
+                      <li><NavLink to={`/page`}>Pagina</NavLink></li>
                       <li><NavLink to={`/category`}>Categoria</NavLink></li>
                       <li><NavLink to={`/products`}>Productos</NavLink></li>
                       <li><NavLink to={`/orders`}>Ordenes</NavLink></li>

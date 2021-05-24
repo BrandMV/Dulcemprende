@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import Layout from "../../components/Diseño/Layout";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import './styles.css'
 import {
   getAllCategory,
   addCategory,
   updateCategories,
   deleteCategories as deleteCategoriesAction,
 } from "../../actions";
-import Input from "../../components/UI/Input/Input";
 import Modal from "../../components/UI/Modal/Modal";
 import CheckboxTree from "react-checkbox-tree";
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
@@ -17,6 +17,9 @@ import {
   IoIosCheckboxOutline,
   IoIosArrowDown,
   IoIosArrowForward,
+  IoIosAdd,
+  IoIosTrash,
+  IoIosColorWand,
 } from "react-icons/io";
 import UpdateCategoriesModal from "./components/UpdateCategoriesModal";
 import AddCategoryModal from "./components/AddCategoryModal";
@@ -38,17 +41,17 @@ const Category = () => {
   const handleClose = () => {
     const form = new FormData();
 
+    // if(categoryName === ""){
+    //   alert("El nombre es necesario")
+    //   return
+    // }
+
     form.append("nombre", categoryName);
     form.append("idpadre", parentCategoryId);
     form.append("categoryImage", categoryImage);
     dispatch(addCategory(form));
     setCategoryName("");
     setParentCategoryId("");
-    // const cat = {
-    //     categoryName,
-    //     parentCategoryId,
-    //     categoryImage
-    // }
 
     setShow(false);
   };
@@ -74,6 +77,7 @@ const Category = () => {
         value: category._id,
         name: category.nombre,
         idpadre: category.idpadre,
+        type: category.type
       });
       if (category.children.length > 0) {
         createCategoryList(category.children, options);
@@ -146,11 +150,7 @@ const Category = () => {
       form.append("type", item.type);
     });
 
-    dispatch(updateCategories(form)).then((result) => {
-      if (result) {
-        dispatch(getAllCategory());
-      }
-    });
+    dispatch(updateCategories(form))
 
     setUpdateCategoryModal(false);
   };
@@ -179,6 +179,7 @@ const Category = () => {
         }
       });
     }
+    setDeleteCategoryModal(false)
   };
 
   const renderDeleteCategoryModal = () => {
@@ -223,13 +224,12 @@ const Category = () => {
           <Col md={12}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <h3>Categoria</h3>
-              <button onClick={handleShow}>Añadir</button>
+    
             </div>
           </Col>
         </Row>
         <Row>
           <Col md={12}>
-            {/* <ul>{renderCategories(category.categories)}</ul> */}
             <CheckboxTree
               nodes={renderCategories(category.categories)}
               checked={checked}
@@ -248,8 +248,11 @@ const Category = () => {
         </Row>
         <Row>
           <Col>
-            <button onClick={deleteCategory}>Borrar</button>
-            <button onClick={updateCategory}>Editar</button>
+          <div className="actionBtnContainer">
+                <button onClick={handleShow}><IoIosAdd /><span>Añadir</span></button>
+                <button onClick={deleteCategory}><IoIosTrash /><span>Borrar</span></button>
+                <button onClick={updateCategory}><IoIosColorWand /><span>Editar</span></button>
+              </div>
           </Col>
         </Row>
       </Container>

@@ -10,6 +10,7 @@ import { isUserLoggedIn, getInitialData } from './actions'
 import Products from "./Containers/Products/Products";
 import Ordenes from "./Containers/Ordenes/Ordenes";
 import Category from "./Containers/Category/Category";
+import NewPage from "./Containers/NewPage/NewPage";
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
   
         <Switch>
           <PrivateRoute path="/" exact component={Home} />
+          <PrivateRoute path="/page" component={NewPage} />
           <PrivateRoute path="/products" component={Products} />
           <PrivateRoute path="/orders" component={Ordenes} />
           <PrivateRoute path="/category" component={Category} />

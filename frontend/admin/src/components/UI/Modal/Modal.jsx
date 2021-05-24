@@ -4,7 +4,7 @@ import { Modal, Button } from "react-bootstrap";
 const NewModal = (props) => {
   return (
     <Modal size={props.size} show={props.show} onHide={props.handleClose}>
-      <Modal.Header closeButton>
+      <Modal.Header closeButton >
         <Modal.Title>{props.modalTittle}</Modal.Title>
       </Modal.Header>
       <Modal.Body>{props.children}</Modal.Body>
@@ -15,7 +15,7 @@ const NewModal = (props) => {
               {btn.label}
             </Button>
           ):
-          <Button  variant="primary" onClick={props.handleClose}>
+          <Button  variant="primary"  {...props}  className="btn-sm" onClick={props.handleClose} style={{backgroundColor: "#0a1931"}}>
               Listo
             </Button>
           }
