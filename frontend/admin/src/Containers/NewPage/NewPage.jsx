@@ -17,11 +17,22 @@ const NewPage = () => {
   const [banners, setBanners] = useState([])
   const [products, setProducts] = useState([])
   const dispatch = useDispatch()
-
+  const page = useSelector(state => state.page)
   const [type, setType] = useState('')
   useEffect(() => {
     setCategories(linearCategories(category.categories));
   }, [category]);
+  useEffect(() => {
+    console.log(page);
+    if(!page.loading){
+        setCreateModal(false)
+        setTitle('')
+        setDesc('')
+        setCategoryId('')
+        setProducts([])
+        setBanners([])
+    }
+  }, [page])
 
   const handleBannerImages = (e) => {
     console.log(e);
@@ -33,7 +44,7 @@ const NewPage = () => {
 
   }
   const onCategoryChange = (e) => {
-      const category = categories.find(category => category._id == e.target.value)
+      const category = categories.find(category => category.value == e.target.value)
       setCategoryId(e.target.value)
       setType(category.type)
   }
@@ -57,21 +68,20 @@ const NewPage = () => {
     })
 
     dispatch(createPage(form))
-    setCreateModal(false)
 
-    console.log({title, desc, categoryId, type, banners, products});
   }
   const renderCreatePageModal = () => {
     return (
       <Modal
         show={createModal}
         modalTittle={"Crear nueva página"}
-        handleClose={submitPageForm}
+        handleClose={() => setCreateModal(false)}
+        onSubmit={submitPageForm}
       >
         <Container>
           <Row>
             <Col>
-              <select
+              {/* <select
                 className="form-control form-control-sm"
                 value={categoryId}
                 onChange={onCategoryChange}
@@ -82,7 +92,14 @@ const NewPage = () => {
                     {cat.name}
                   </option>
                 ))}
-              </select>
+              </select> */}
+              <Input 
+                type="select"
+                value={categoryId}
+                onChange={onCategoryChange}
+                options={categories}
+                placeholder={'Slecciona una categoria'}
+              />
             </Col>
           </Row>
           <Row>
@@ -147,8 +164,17 @@ const NewPage = () => {
 
   return (
     <Layout sidebar>
-      {renderCreatePageModal()}
-      <button onClick={() => setCreateModal(true)}>Crear página</button>
+        {
+            page.loading ? 
+            <p>Creando Página</p>
+            :
+            <>
+                {renderCreatePageModal()}
+                <button onClick={() => setCreateModal(true)}>Crear página</button>
+            </>
+           
+        }
+   
     </Layout>
   );
 };

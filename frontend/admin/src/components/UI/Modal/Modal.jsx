@@ -15,7 +15,7 @@ const NewModal = (props) => {
               {btn.label}
             </Button>
           ):
-          <Button  variant="primary"  {...props}  className="btn-sm" onClick={props.handleClose} style={{backgroundColor: "#0a1931"}}>
+          <Button  variant="primary"  {...props}  className="btn-sm" onClick={props.onSubmit} style={{backgroundColor: "#0a1931"}}>
               Listo
             </Button>
           }

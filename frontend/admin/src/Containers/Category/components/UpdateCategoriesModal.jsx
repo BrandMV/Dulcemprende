@@ -13,6 +13,7 @@ const UpdateCategoriesModal = (props) => {
     checkedArray,
     handleCategoryInput,
     categoryList,
+    onSubmit
   } = props;
 
   console.log({expandedArray, checkedArray});
@@ -23,6 +24,7 @@ const UpdateCategoriesModal = (props) => {
       handleClose={handleClose}
       modalTittle={modalTittle}
       size={size}
+      onSubmit={onSubmit}
     >
       <Row>
         <Col>

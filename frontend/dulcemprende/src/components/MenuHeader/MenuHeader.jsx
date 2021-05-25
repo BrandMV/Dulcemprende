@@ -18,7 +18,7 @@ const MenuHeader = () => {
       myCategories.push(
         <li key={category.nombre}>
           {category.idpadre ? (
-            <a href={category.slug}>{category.nombre}</a>
+            <a href={`/${category.slug}?cid=${category._id}&type=${category.type}`}>{category.nombre}</a>
           ) : (
             <span>{category.nombre}</span>
           )}

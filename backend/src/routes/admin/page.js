@@ -1,6 +1,6 @@
 const express = require("express");
 const { upload, adminMiddleware, requireSignin } = require("../../common");
-const { createPage } = require("../../controller/admin/page");
+const { createPage, getPAge } = require("../../controller/admin/page");
 const router = express.Router();
 
 
@@ -9,5 +9,6 @@ router.post("/page/create", requireSignin, adminMiddleware,upload.fields([
     { name: 'products'}
 ]), createPage);
 
+router.get(`/page/:category/:type`, getPAge)
 
 module.exports = router;
