@@ -5,7 +5,7 @@ import MenuHeader from '../../components/MenuHeader/MenuHeader'
 const HomePage = () => {
     return (
         <Diseño>
-            dsada
+            Pagina de inicio
         </Diseño>
     )
 }

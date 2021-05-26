@@ -91,7 +91,7 @@ const Products = () => {
       <Modal
         show={show}
         handleClose={handleClose}
-        modalTittle={"Añadir producto"}
+        modalTitle={"Añadir producto"}
       >
         <Input
           label="Nombre"
@@ -161,7 +161,7 @@ const Products = () => {
       <Modal
         show={productDetailModal}
         handleClose={handleCloseProductDetailsModal}
-        modalTittle={"Detalles del producto"}
+        modalTitle={"Detalles del producto"}
         size="lg"
       >
         <Row>
@@ -194,8 +194,8 @@ const Products = () => {
           <Col>
             <label className="key">Imagenes</label>
             <div style={{ display: "flex" }}>
-              {productDetails.productPictures.map((picture) => (
-                <div className="productImgContainer">
+              {productDetails.productPictures.map((picture, index) => (
+                <div key={index} className="productImgContainer">
                   <img src={generatePublicUrl(picture.img)} />
                 </div>
               ))}

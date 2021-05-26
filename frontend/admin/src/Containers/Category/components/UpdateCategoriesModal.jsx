@@ -8,7 +8,7 @@ const UpdateCategoriesModal = (props) => {
     show,
     size,
     handleClose,
-    modalTittle,
+    modalTitle,
     expandedArray,
     checkedArray,
     handleCategoryInput,
@@ -22,7 +22,7 @@ const UpdateCategoriesModal = (props) => {
     <Modal
       show={show}
       handleClose={handleClose}
-      modalTittle={modalTittle}
+      modalTitle={modalTitle}
       size={size}
       onSubmit={onSubmit}
     >

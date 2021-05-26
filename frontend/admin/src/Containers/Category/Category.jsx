@@ -162,8 +162,8 @@ const Category = () => {
     });
 
     dispatch(updateCategories(form))
-
     setUpdateCategoryModal(false);
+
   };
 
 
@@ -196,7 +196,7 @@ const Category = () => {
   const renderDeleteCategoryModal = () => {
     return (
       <Modal
-        modalTittle="Confirmar"
+        modalTitle="Eliminar categoria"
         show={deleteCategoryModal}
         handleClose={() => setDeleteCategoryModal(false)}
         buttons={[
@@ -271,7 +271,7 @@ const Category = () => {
             show={show}
             handleClose={() => setShow(false)}
             onSubmit={handleClose}
-            modalTittle={"Añadir categoria"}
+            modalTitle={"Añadir categoria"}
             categoryName={categoryName}
             setCategoryName={setCategoryName}
             parentCategoryId={parentCategoryId}
@@ -283,7 +283,7 @@ const Category = () => {
           show={updateCategoryModal}
           handleClose={() => setUpdateCategoryModal(false)}
           onSubmit={updateCategoriesForm}
-          modalTittle={"Actualizar categoria"}
+          modalTitle={"Actualizar categoria"}
           size="lg"
           expandedArray={expandedArray}
           checkedArray={checkedArray}

@@ -22,7 +22,7 @@ const ProductStore = (props) => {
     <>
       {Object.keys(product.productsByPrice).map((key, index) => {
         return (
-          <div className="card">
+          <div className="card" key={index}>
             <div className="cardHeader">
               <div>
                 {props.match.params.slug} por menos de {priceRange[key]}
@@ -30,8 +30,8 @@ const ProductStore = (props) => {
               <button>Ver todos</button>
             </div>
             <div style={{ display: "flex" }}>
-              {product.productsByPrice[key].map((product) => (
-                <div className="productContainer">
+              {product.productsByPrice[key].map((product, index) => (
+                <div className="productContainer" key={index}>
                   <div className="productImgContainer">
                     <img
                       src={generatePublicUrl(product.productPictures[0].img)}

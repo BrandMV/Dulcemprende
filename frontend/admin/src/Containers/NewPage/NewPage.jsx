@@ -74,7 +74,7 @@ const NewPage = () => {
     return (
       <Modal
         show={createModal}
-        modalTittle={"Crear nueva página"}
+        modalTitle={"Crear nueva página"}
         handleClose={() => setCreateModal(false)}
         onSubmit={submitPageForm}
       >

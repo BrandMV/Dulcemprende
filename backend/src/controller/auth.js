@@ -42,9 +42,9 @@ exports.signin = (req, res, next) => {
   User.findOne({ correo: req.body.correo }).exec((error, user) => {
     if (error) return res.status(400).json({ error });
     if (user) {
-      if (user.authenticate(req.body.contra)) {
+      if (user.authenticate(req.body.contra) && user.rol === 'user') {
         const token = jwt.sign({ _id: user._id, rol: user.rol}, process.env.JWT_SECRET, {
-          expiresIn: "2h",
+          expiresIn: "1d",
         }); //dos horas de expiracion
         const { _id, nombre, apellido, correo, rol, nombreCompleto } = user;
         res.status(200).json({
@@ -60,7 +60,7 @@ exports.signin = (req, res, next) => {
         });
       } else {
         return res.status(400).json({
-          message: "Contraseña incorrecta",
+          message: "Algo salió mal",
         });
       }
     } else {

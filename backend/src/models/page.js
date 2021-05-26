@@ -13,18 +13,16 @@ const pageSchema = new mongoose.Schema({
     },
     banners: [
         {
-            img: {
-                type: String,
-                href: String
-            }
+            img: {type: String},
+            navigateTo: {type: String}
+ 
         }
     ],
     products: [
         {
-            img: {
-                img: {type: String},
-                navigateTo: { type: String}
-            }
+            img: {type: String},
+            navigateTo: {type: String}
+            
         }
     ],
     category: { type: mongoose.Schema.Types.ObjectId,
