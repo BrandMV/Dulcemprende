@@ -23,6 +23,11 @@ const Products = () => {
   const [productDetails, setProductDetails] = useState(null);
 
   const handleClose = () => {
+
+    setShow(false);
+  };
+
+  const submitProductForm = () => {
     const form = new FormData();
     form.append("name", name);
     form.append("quantity", quantity);
@@ -33,9 +38,8 @@ const Products = () => {
       form.append("productPicture", pic);
     }
 
-    dispatch(addProduct(form));
-    setShow(false);
-  };
+    dispatch(addProduct(form)).then(() => setShow(false));
+  }
   const handleShow = () => setShow(true);
 
   const createCategoryList = (categories, options = []) => {
@@ -92,6 +96,7 @@ const Products = () => {
         show={show}
         handleClose={handleClose}
         modalTitle={"Añadir producto"}
+        onSubmit={submitProductForm}
       >
         <Input
           label="Nombre"

@@ -27,11 +27,30 @@ const Header = (props) => {
 
   useEffect(() => {
       if(auth.authenticate){
+          setLoginModal(false)
 
       }
   }, [auth.authenticate])
 
   const renderLoggedInMenu = () => {
+
+    return (
+        <DropdownMenu
+        menu={
+          <a className="nombreCompleto">
+            {auth.user.nombreCompleto}
+          </a>
+        }
+        menus={[
+          { label: 'My Profile', href: '', icon: null },
+          { label: 'Flipkart Plus Zone', href: '', icon: null },
+          { label: 'Orders', href: '', icon: null },
+          { label: 'Wishlist', href: '', icon: null },
+          { label: 'Rewards', href: '', icon: null },
+          { label: 'Cerrar Sesión', href: '', icon: null },
+        ]}
+      />
+    )
 
   }
   const renderNonLoggedInMenu = () => {
@@ -145,7 +164,11 @@ const Header = (props) => {
           </div>
         </div>
         <div className="rightMenu">
-            {renderNonLoggedInMenu()}
+            {
+
+                auth.authenticate ?
+                renderLoggedInMenu() : renderNonLoggedInMenu()
+            }
           <DropdownMenu
             menu={
               <a className="more">
