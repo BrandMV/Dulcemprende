@@ -2,7 +2,6 @@ import axios from "../helpers/axios";
 import { userConstants } from "./constants";
 
 export const signup = (user) => {
-    console.log(user);
   
     return async (dispatch) => {
       dispatch({ type: userConstants.USER_REGISTER_REQUEST });

@@ -36,11 +36,14 @@ export default (state = initState, action) => {
 
       break;
     case productConstants.GET_PRODUCT_PAGE_SUCCESS:
+
       state = {
         ...state,
         page: action.payload.page,
+        
         pageRequest: false
       };
+      
 
       break;
     case productConstants.GET_PRODUCT_PAGE_FAILURE:
@@ -54,8 +57,9 @@ export default (state = initState, action) => {
     case productConstants.GET_PRODUCT_DETAILS_BY_ID_REQUEST:
       state = {
         ...state,
-        loading: true
+        loading: true,
       }
+
       break;
     case productConstants.GET_PRODUCT_DETAILS_BY_ID_SUCCESS:
       state ={
@@ -72,6 +76,7 @@ export default (state = initState, action) => {
       }
       break;
   }
+  console.log(state.productDetails);
 
   return state;
 };

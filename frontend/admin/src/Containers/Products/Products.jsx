@@ -21,7 +21,6 @@ const Products = () => {
   const product = useSelector((state) => state.product);
   const [productDetailModal, setProductDetailModal] = useState(false);
   const [productDetails, setProductDetails] = useState(null);
-
   const handleClose = () => {
 
     setShow(false);
@@ -39,12 +38,13 @@ const Products = () => {
     }
 
     dispatch(addProduct(form)).then(() => setShow(false));
+    
   }
   const handleShow = () => setShow(true);
 
   const createCategoryList = (categories, options = []) => {
     for (let category of categories) {
-      options.push({ value: category._id, name: category.nombre });
+      options.push({ value: category._id, name: category.name });
       if (category.children.length > 0) {
         createCategoryList(category.children, options);
       }
@@ -62,7 +62,7 @@ const Products = () => {
       <Table responsive="sm" style={{ fontSize: 14 }}>
         <thead>
           <tr>
-            <th>#</th>
+           
             <th>Nombre</th>
             <th>Precio</th>
             <th>Cantidad</th>
@@ -76,12 +76,12 @@ const Products = () => {
                   key={product._id}
                   onClick={() => showProductDetailsModal(product)}
                 >
-                  <td>1</td>
+           
                   <td>{product.name}</td>
                   <td>{product.price}</td>
                   <td>{product.quantity}</td>
                   {/* <td>{product.category}</td> */}
-                  <td>{product.category.nombre}</td>
+                  <td>{product.category.name}</td>
                 </tr>
               ))
             : null}
@@ -91,6 +91,11 @@ const Products = () => {
   };
 
   const renderAddProductModal = () => {
+    console.log("categoriaproduct", categoryId);
+    console.log("nameproduct", name);
+    console.log("categoriaproduct", quantity);
+    console.log("categoriaproduct", description);
+    console.log("categoriaproduct", productPictures);
     return (
       <Modal
         show={show}
@@ -162,12 +167,16 @@ const Products = () => {
     if (!productDetails) {
       return null;
     }
+console.log("pDe",productDetails);
+
     return (
       <Modal
+      size="lg"
+
         show={productDetailModal}
         handleClose={handleCloseProductDetailsModal}
         modalTitle={"Detalles del producto"}
-        size="lg"
+        onSubmit={handleCloseProductDetailsModal}
       >
         <Row>
           <Col md="6">
@@ -186,7 +195,7 @@ const Products = () => {
           </Col>
           <Col md="6">
             <label className="key">Categoria</label>
-            <p className="value">{productDetails.category.nombre}</p>
+            <p className="value">{productDetails.category.name}</p>
           </Col>
         </Row>
         <Row>

@@ -1,4 +1,3 @@
-import { bindActionCreators } from "redux";
 import { productConstants } from "../actions/constants";
 
 const initialState = {
@@ -12,8 +11,9 @@ export default (state = initialState, action) => {
             state = {
                 ...state,
                 products: action.payload.products
-            }
-            
+            }           
+            break;
+        default:
             break;
 
     }

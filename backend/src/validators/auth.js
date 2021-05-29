@@ -1,15 +1,15 @@
 const {check, validationResult} = require('express-validator');
 
 exports.validateSignupRequest = [
-    check('nombre').notEmpty().withMessage('El nombre es requerido'),
-    check("apellido").notEmpty().withMessage('Los apellidos son requeridos'),
-    check('correo').isEmail().withMessage('Ingresa un correo valido'),
-    check('contra').isLength({min: 7}).withMessage('La contraseña debe de tener al menos 7 caracteres')
+    check('firstName').notEmpty().withMessage('El nombre es requerido'),
+    check("lastName").notEmpty().withMessage('Los apellidos son requeridos'),
+    check('email').isEmail().withMessage('Ingresa un correo valido'),
+    check('password').isLength({min: 7}).withMessage('La contraseña debe de tener al menos 7 caracteres')
 ]
 
 exports.validateSigninRequest = [
-    check('correo').isEmail().withMessage('Ingresa un correo valido'),
-    check('contra').isLength({min: 7}).withMessage('La contraseña es incorrecta')
+    check('email').isEmail().withMessage('Ingresa un correo valido'),
+    check('password').isLength({min: 7}).withMessage('La contraseña es incorrecta')
 ]
 
 exports.isRequestValidated = (req, res, next) => {

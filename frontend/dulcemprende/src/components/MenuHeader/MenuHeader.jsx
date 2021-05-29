@@ -2,7 +2,7 @@ import React from "react";
 import "./styles.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllCategory } from "../../actions";
+import { getAllCategory } from "../../actions/category.action";
 
 const MenuHeader = () => {
   const category = useSelector((state) => state.category);

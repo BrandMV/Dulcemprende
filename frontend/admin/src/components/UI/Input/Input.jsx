@@ -23,7 +23,7 @@ switch (props.type) {
     </select>
   </Form.Group>
     break;
-  case '':
+  case 'text':
   default:
     input = <Form.Group>
         {props.label && <Form.Label>{props.label}</Form.Label>}

@@ -4,24 +4,23 @@ import Layout from "../../components/Diseño/Layout";
 import Input from "../../components/UI/Input/Input";
 import { login } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Redirect } from "react-router-dom";
 
 const Signin = () => {
-  const [correo, setCorreo] = useState('')
-  const [contra, setContra] = useState('')
-  const [error, setError] = useState('')
-  const auth = useSelector(state => state.auth)
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const auth = useSelector(state => state.auth);
 
   const dispatch = useDispatch();
-
   const userLogin = (e) => {
 
     e.preventDefault()
 
     const user = {
-      correo, contra
-    }
+      email, password
+  }
 
     dispatch(login(user))
 
@@ -40,17 +39,17 @@ const Signin = () => {
               <Input
                 label="Correo"
                 placeholder="Correo"
-                value={correo}
+                value={email}
                 type="email"
-                onChange={(e) => setCorreo(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
 
               <Input
                 label="Contraseña"
                 placeholder="Contraseña"
-                value={contra}
+                value={password}
                 type="password"
-                onChange={(e) => setContra(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <Button
                 variant="primary"

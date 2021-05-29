@@ -1,60 +1,65 @@
-const mongoose = require('mongoose')
-const bcrypt = require('bcrypt') //hashear contraseña
-//esquema del usuario con lo necesario
-const userSchema = new mongoose.Schema({
-    nombre:{
-        type: String,
-        required: true,
-        trim: true, //"hello  "/ " hello" => "hello"
-        min: 3,
-        max: 20
-    },
-    apellido:{
-        type: String,
-        required: true,
-        trim: true, //"hello  "/ " hello" => "hello"
-        min: 3,
-        max: 20
-    },
-    username:{
-        type: String,
-        required: true,
-        trim: true,
-        unique: true,
-        lowercase: true
-    },
-    correo: {
-        type: String,
-        required: true,
-        trim: true,
-        unique: true,
-        lowercase: true
-    },
-    hash_contra:{
-        type: String,
-        required: true
-    },
-    rol: {
-        type: String,
-        enum: ['user', 'admin'],
-        default: 'user'
-    },
-    numero:{type: String},
-    foto:{type: String}
-}, {timestamps: true})
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
-// userSchema.virtual('contra').set(function(contra){
-//     this.hash_contra = bcrypt.hashSync(contra, 10) //hasheamos la contraseña
-// })
+const userSchema = new mongoose.Schema(
+  {
+    firstName: {
+      type: String,
+      required: true,
+      trim: true,
+      min: 3,
+      max: 20,
+    },
+    lastName: {
+      type: String,
+      required: true,
+      trim: true,
+      min: 3,
+      max: 20,
+    },
+    username: {
+      type: String,
+      required: true,
+      trim: true,
+      unique: true,
+      index: true,
+      lowercase: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      trim: true,
+      unique: true,
+      lowercase: true,
+    },
+    hash_password: {
+      type: String,
+      required: true,
+    },
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
+    },
+    contactNumber: { type: String },
+    pofilePicture: { type: String },
+  },
+  { timestamps: true }
+);
 
-userSchema.virtual("nombreCompleto").get(function(){
-    return `${this.nombre} ${this.apellido}`
-})
+// userSchema.virtual('password')
+// .set(function(password){
+//     this.hash_password = bcrypt.hashSync(password, 10);
+// });
+
+userSchema.virtual("fullName").get(function () {
+  return `${this.firstName} ${this.lastName}`;
+});
 
 userSchema.methods = {
-    authenticate: async function(contra){
-        return await bcrypt.compare(contra, this.hash_contra) //corroboramos la contraseña del usuario con bcrypt
-    }
-}
+  authenticate: async function (password) {
+    return await bcrypt.compare(password, this.hash_password);
+  },
+};
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model("User", userSchema);

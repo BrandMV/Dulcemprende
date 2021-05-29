@@ -1,83 +1,81 @@
 const User = require("../../models/user");
-const jwt = require("jsonwebtoken"); //creamos un token para manejar la sesión
-const bcrypt = require('bcrypt')
-const shortid = require('shortid')
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const shortid = require("shortid");
 
 exports.signup = (req, res) => {
-  User.findOne({ correo: req.body.correo }).exec( async (error, user) => {
+  User.findOne({ email: req.body.email }).exec((error, user) => {
     if (user)
       return res.status(400).json({
-        message: "Administrador ya registrado",
+        message: "Admin already registered",
       });
 
-    const { nombre, apellido, correo, contra } = req.body;
-    const hash_contra = await bcrypt.hash(contra, 10)
-    const _user = new User({
-      nombre,
-      apellido,
-      correo,
-      hash_contra,
-      username: shortid.generate(),
-      rol: 'admin'
-    });
+    User.estimatedDocumentCount(async (err, count) => {
+      if (err) return res.status(400).json({ error });
 
-    _user.save((error, data) => {
-      if (error) {
-        return res.status(400).json({
-          message: "Algo salió mal",
-        });
-      }
-      if (data) {
-        return res.status(201).json({
-          message: "Registrado exitosamente como administrador",
-        });
-      }
+      const { firstName, lastName, email, password } = req.body;
+      console.log(req);
+      const hash_password = await bcrypt.hash(password, 10);
+      const _user = new User({
+        firstName,
+        lastName,
+        email,
+        hash_password,
+        username: shortid.generate(),
+        role: 'admin',
+      });
+
+      _user.save((error, data) => {
+        if (error) {
+          return res.status(400).json({
+            message: "Something went wrong",
+          });
+        }
+
+        if (data) {
+          return res.status(201).json({
+            message: "Admin created Successfully..!",
+          });
+        }
+      });
     });
   });
 };
 
-exports.signin = (req, res, next) => {
-  User.findOne({ correo: req.body.correo }).exec((error, user) => {
+exports.signin = (req, res) => {
+  User.findOne({ email: req.body.email }).exec(async (error, user) => {
     if (error) return res.status(400).json({ error });
     if (user) {
-      if (user.authenticate(req.body.contra) && user.rol === 'admin') {
-        const token = jwt.sign({ _id: user._id, rol: user.rol }, process.env.JWT_SECRET, {
-          expiresIn: "1d",
-        }); //dos horas de expiracion
-        const { _id, nombre, apellido, correo, rol, nombreCompleto } = user;
-        res.cookie('token', token, {expiresIn: '1d'})
+      const isPassword = await user.authenticate(req.body.password);
+      if (
+        isPassword &&
+        user.role === "admin"
+      ) {
+        const token = jwt.sign(
+          { _id: user._id, role: user.role },
+          process.env.JWT_SECRET,
+          { expiresIn: "1d" }
+        );
+        const { _id, firstName, lastName, email, role, fullName } = user;
+        res.cookie("token", token, { expiresIn: "1d" });
         res.status(200).json({
           token,
-          user: {
-            _id,
-            nombre,
-            apellido,
-            correo,
-            rol,
-            nombreCompleto,
-          },
+          user: { _id, firstName, lastName, email, role, fullName },
         });
       } else {
         return res.status(400).json({
-          message: "Contraseña incorrecta",
+          message: "Invalid Password",
         });
       }
     } else {
-      return res.status(400).json({ message: "Algo salió mal" });
+      return res.status(400).json({ message: "Something went wrong" });
     }
   });
 };
 
-exports.requireSignin = (req, res, next) => {
-    const token = req.headers.authorization.split(" ")[1]
-    const user = jwt.verify(token, process.env.JWT_SECRET)
-    req.user = user;
-    next()
-}
-
 exports.signout = (req, res) => {
-  res.clearCookie('token')
+  res.clearCookie("token");
   res.status(200).json({
-    message: 'Cerro sesión axitosamente'
-  })
-}
+    message: "Signout successfully...!",
+  });
+};

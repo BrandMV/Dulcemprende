@@ -10,7 +10,7 @@ import {
   MaterialButton,
   DropdownMenu
 } from '../MaterialUI/MaterialUI';
-import { login } from '../../actions';
+import { login, signout } from '../../actions';
 
 
 const Header = (props) => {
@@ -23,6 +23,9 @@ const Header = (props) => {
   
   const userLogin = () => {
         dispatch(login({correo, contra}))
+  }
+  const logout = () => {
+    dispatch(signout())
   }
 
   useEffect(() => {
@@ -47,7 +50,7 @@ const Header = (props) => {
           { label: 'Orders', href: '', icon: null },
           { label: 'Wishlist', href: '', icon: null },
           { label: 'Rewards', href: '', icon: null },
-          { label: 'Cerrar Sesión', href: '', icon: null },
+          { label: 'Cerrar Sesión', href: '', icon: null, onClick: logout },
         ]}
       />
     )

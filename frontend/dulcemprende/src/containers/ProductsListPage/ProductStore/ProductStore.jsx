@@ -6,6 +6,8 @@ import { generatePublicUrl } from "../../../urlConfig";
 import { Link } from 'react-router-dom'
 const ProductStore = (props) => {
     const product = useSelector((state) => state.product);
+  console.log("productSlug",product);
+
     const dispatch = useDispatch();
       const [priceRange, setPriceRange] = useState({
           uder5k: 5000,
@@ -16,7 +18,9 @@ const ProductStore = (props) => {
       })
     useEffect(() => {
       const { match } = props;
+      // console.log("slug",match.params.slug);
       dispatch(getProductsBySlug(match.params.slug));
+      console.log("propsSlug", props);
     }, []);
   return (
     <>

@@ -20,7 +20,7 @@ const upload = multer({storage})
 
 
 router.post('/product/create', requireSignin, adminMiddleware,upload.array('productPicture'), createProduct)
-router.get('/product/:slug', getProductsBySlug)
 router.get('/product/:productId', getProductDetailsById)
+router.get('/product/:slug', getProductsBySlug)
 
 module.exports = router

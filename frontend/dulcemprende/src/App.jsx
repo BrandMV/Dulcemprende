@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import ProductsListPage from './containers/ProductsListPage/ProductsListPage'
 import { useDispatch, useSelector } from 'react-redux'
 import { isUserLoggedIn } from './actions'
-import ProductDetailsPage from './containers/ProductDetailsPage/ProductDetailsPage'
+import ProductDetails from './containers/ProductDetailsPage/ProductDetails'
 
 const App = () => {
 
@@ -25,8 +25,9 @@ const App = () => {
             <Router>
                 <Switch>
                         <Route path="/" exact component={HomePage} />
-                        <Route path="/:productSlug/:productId/p" component={ProductDetailsPage} />
+                        <Route path="/:productSlug/:productId/p" component={ProductDetails} /> {/*primero para que no renderee*/}
                         <Route path="/:slug" component={ProductsListPage} />
+
                 </Switch>
             </Router>
            

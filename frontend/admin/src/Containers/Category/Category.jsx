@@ -57,8 +57,8 @@ const Category = () => {
       return
     }
 
-    form.append("nombre", categoryName);
-    form.append("idpadre", parentCategoryId);
+    form.append("name", categoryName);
+    form.append("parentId", parentCategoryId);
     form.append("categoryImage", categoryImage);
     dispatch(addCategory(form));
     setCategoryName("");
@@ -72,7 +72,7 @@ const Category = () => {
     let myCategories = [];
     for (let category of categories) {
       myCategories.push({
-        label: category.nombre,
+        label: category.name,
         value: category._id,
         children:
           category.children.length > 0 && renderCategories(category.children),
@@ -86,8 +86,8 @@ const Category = () => {
     for (let category of categories) {
       options.push({
         value: category._id,
-        name: category.nombre,
-        idpadre: category.idpadre,
+        name: category.name,
+        parentId: category.parentId,
         type: category.type
       });
       if (category.children.length > 0) {
@@ -150,14 +150,14 @@ const Category = () => {
 
     expandedArray.forEach((item, index) => {
       form.append("_id", item.value);
-      form.append("nombre", item.name);
-      form.append("idpadre", item.idpadre ? item.idpadre : "");
+      form.append("name", item.name);
+      form.append("parentId", item.parentId ? item.parentId : "");
       form.append("type", item.type);
     });
     checkedArray.forEach((item, index) => {
       form.append("_id", item.value);
-      form.append("nombre", item.name);
-      form.append("idpadre", item.idpadre ? item.idpadre : "");
+      form.append("name", item.name);
+      form.append("parentId", item.parentId ? item.parentId : "");
       form.append("type", item.type);
     });
 

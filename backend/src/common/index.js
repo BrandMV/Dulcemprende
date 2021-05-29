@@ -28,13 +28,13 @@ exports.requireSignin = (req, res, next) => {
 };
 
 exports.userMiddleware = (req, res, next) => {
-  if (req.user.rol !== "user")
+  if (req.user.role !== "user")
     return res.status(400).json({ message: "Acceso denegado al cliente" });
   next();
 };
 
 exports.adminMiddleware = (req, res, next) => {
-  if (req.user.rol !== "admin")
+  if (req.user.role !== "admin")
     return res.status(400).json({ message: "Acceso denegado al admin" });
   next();
 };

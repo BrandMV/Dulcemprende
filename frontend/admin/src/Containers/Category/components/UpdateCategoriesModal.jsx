@@ -45,11 +45,11 @@ const UpdateCategoriesModal = (props) => {
             </Col>
             <Col>
               <select
-                value={item.idpadre}
+                value={item.parentId}
                 className="form-control"
                 onChange={(e) =>
                   handleCategoryInput(
-                    "idpadre",
+                    "parentId",
                     e.target.value,
                     index,
                     "expanded"
@@ -95,11 +95,11 @@ const UpdateCategoriesModal = (props) => {
             </Col>
             <Col>
               <select
-                value={item.idpadre}
+                value={item.parentId}
                 className="form-control"
                 onChange={(e) =>
                   handleCategoryInput(
-                    "idpadre",
+                    "parentId",
                     e.target.value,
                     index,
                     "checked"
