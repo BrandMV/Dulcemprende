@@ -10,7 +10,7 @@ import {
   MaterialInput,
   MaterialButton,
   DropdownMenu,
-} from "../MaterialUI";
+} from "../MaterialUI/MaterialUI";
 
 const Header = (props) => {
   const auth = useSelector((state) => state.auth);

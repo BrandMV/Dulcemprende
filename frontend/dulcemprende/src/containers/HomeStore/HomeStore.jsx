@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../../components/Layout";
+import Layout from "../../components/Layout/Layout";
 import emprende from "../../images/emprende.svg";
 import carlos from "../../images/carlos.jpg";
 import mamut from "../../images/mamut.jpg";

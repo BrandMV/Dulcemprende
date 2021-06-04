@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrder } from "../../actions";
-import Layout from "../../components/Layout";
-import Card from "../../components/UI/Card";
+import Layout from "../../components/Layout/Layout";
 import Price from "../../components/UI/Price";
 import {generatePublicUrl} from '../../urlConfig'
 

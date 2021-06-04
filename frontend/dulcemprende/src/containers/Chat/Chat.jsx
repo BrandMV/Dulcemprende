@@ -1,12 +1,10 @@
 import React, {useState, useRef} from 'react'
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import {useCollectionData} from 'react-firebase-hooks/firestore'
 import man from '../../images/hombre.svg'
 import './style.css'
-import Layout from '../../components/Layout';
-import Sidebar from '../../components/Sidebar/Sidebar';
 
 firebase.initializeApp({
     apiKey: "AIzaSyBhl1ZuhkejVMIF1K86vLDMvet9MerueDQ",

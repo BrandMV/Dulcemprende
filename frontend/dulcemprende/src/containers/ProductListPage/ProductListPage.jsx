@@ -1,15 +1,8 @@
 import React from "react";
-import Layout from "../../components/Layout";
+import Layout from "../../components/Layout/Layout";
 import getParams from "../../utils/getParams";
-import ClothingAndAccessories from "./ClothingAndAccessories";
-import ProductPage from "./ProductPage";
-import ProductStore from "./ProductStore";
+import ProductStore from "./ProductStore/ProductStore";
 import "./style.css";
-
-/**
- * @author
- * @function ProductListPage
- **/
 
 const ProductListPage = (props) => {
   const renderProduct = () => {
@@ -20,11 +13,6 @@ const ProductListPage = (props) => {
       case "store":
         content = <ProductStore {...props} />;
         break;
-      case "page":
-        content = <ProductPage {...props} />;
-        break;
-      default:
-        content = <ClothingAndAccessories {...props} />;
     }
 
     return content;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addAddress } from "../../actions";
-import { MaterialButton, MaterialInput } from "../../components/MaterialUI";
+import { MaterialButton, MaterialInput } from "../../components/MaterialUI/MaterialUI";
 
 const AddressForm = (props) => {
   const { initialData } = props;

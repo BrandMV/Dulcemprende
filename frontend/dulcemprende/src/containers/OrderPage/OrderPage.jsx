@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getOrders } from "../../actions";
-import Layout from "../../components/Layout";
-import Card from "../../components/UI/Card";
+import Layout from "../../components/Layout/Layout";
+import Card from "../../components/UI/Card/Card";
 import { IoIosArrowForward } from "react-icons/io";
 import { generatePublicUrl } from '../../urlConfig';
 
 import "./style.css";
-import { Breed } from "../../components/MaterialUI";
+import { Breed } from "../../components/MaterialUI/MaterialUI";
 let tot = 0
 const OrderPage = (props) => {
   const dispatch = useDispatch();

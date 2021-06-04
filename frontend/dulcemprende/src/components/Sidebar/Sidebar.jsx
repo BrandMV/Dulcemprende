@@ -7,7 +7,7 @@ import {
     Modal,
     MaterialInput,
     MaterialButton,
-  } from "../MaterialUI";
+  } from "../MaterialUI/MaterialUI";
 const Sidebar = ({ sidebarOpen, closeSidebar }) => {
 
     const auth = useSelector((state) => state.auth);

@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addOrder, getAddress, getCartItems } from "../../actions";
-import Layout from "../../components/Layout";
+import Layout from "../../components/Layout/Layout";
 import {
   Anchor,
   MaterialButton,
-  MaterialInput,
-} from "../../components/MaterialUI";
-import PriceDetails from "../../components/PriceDetails";
-import Card from "../../components/UI/Card";
-import CartPage from "../CartPage";
+} from "../../components/MaterialUI/MaterialUI";
+import PriceDetails from "../../components/PriceDetails/PriceDetails";
+import Card from "../../components/UI/Card/Card";
+import CartPage from "../CartPage/CartPage";
 import AddressForm from "./AddressForm";
 
 import "./style.css";
