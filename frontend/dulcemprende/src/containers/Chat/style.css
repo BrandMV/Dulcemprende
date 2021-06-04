@@ -1,10 +1,14 @@
-
+main {
+  background-color: #f3f4f6;
+  grid-area: main;
+  overflow-y: auto;
+}
   .App {
     text-align: center;
     max-width: 728px;
     margin: 0 auto;
   }
-  
+
   .App header {
     background-color: #181717;
     height: 10vh;
@@ -21,15 +25,23 @@
     padding: 10px;
     box-sizing: border-box;
   }
-  
+  .App header h1{
+    font-size: 30px;
+  }
+
   .App section {
     display: flex;
     flex-direction: column;
     justify-content: center;
     min-height: 100vh;
-    background-color: rgb(40, 37, 53);
+    background-color: #4a503d;
   }
-  
+  .divisor{
+    margin: auto;
+    width: 70%;
+    border: 1px solid #4a503d;
+  }
+
   .chatMain {
     padding: 10px;
     height: 80vh;
@@ -38,19 +50,22 @@
     display: flex;
     flex-direction: column;
   }
-  
+  .chatMain h1{
+    margin-bottom: 10px;
+  }
+
   .chatMain::-webkit-scrollbar {
     width: 0.25rem;
   }
-  
+
   .chatMain::-webkit-scrollbar-track {
-    background: #1e1e24;
+    background: #4a503d;
   }
-  
+
   .chatMain::-webkit-scrollbar-thumb {
-    background: #6649b8;
+    background: #4a503d;
   }
-  
+
   .chatForm {
     height: 10vh;
     position: fixed;
@@ -61,13 +76,13 @@
     display: flex;
     font-size: 1.5rem;
   }
-  
+
   .chatForm button {
     width: 20%;
-    background-color: rgb(56, 56, 143);
+    background-color: #4a503d;
   }
-  
-  
+
+
   .chatInput {
     line-height: 1.5;
     width: 100%;
@@ -78,7 +93,7 @@
     border: none;
     padding: 0 10px;
   }
-  
+
   .chatButton {
     background-color: #282c34; /* Green */
     border: none;
@@ -90,29 +105,30 @@
     cursor: pointer;
     font-size: 1.25rem;
   }
-  
+
   .chatButton:disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
-  
-  
+
+
   .sign-in {
     color: #282c34;
     background: white;
     max-width: 400px;
     margin: 0 auto;
   }
-  
-  
-  
-  
+
+
+
+
   ul, li {
     text-align: left;
     list-style: none;
   }
-  
+
   .para {
+    margin-top: 10px;
     max-width: 500px;
     margin-bottom: 12px;
     line-height: 24px;
@@ -122,17 +138,17 @@
     color: white;
     text-align: center;
   }
-  
+
   .message {
     display: flex;
     align-items: center;
   }
-  
-  
+
+
   .sent {
     flex-direction: row-reverse;
   }
-  
+
   .sent p {
     color: white;
     background: #0b93f6;

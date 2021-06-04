@@ -4,6 +4,8 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import {useCollectionData} from 'react-firebase-hooks/firestore'
 import man from '../../images/hombre.svg'
+import Sidebar from '../../components/Sidebar/Sidebar'
+import Navbar from '../../components/Navbar/Navbar'
 import './style.css'
 
 firebase.initializeApp({
@@ -19,6 +21,16 @@ firebase.initializeApp({
 const firestore = firebase.firestore()
 
 const Chat = () => {
+    let element = "Chat"
+    const [sidebarOpen, setSidebarOpen] = useState(false)
+    const openSidebar = () => {
+      setSidebarOpen(true)
+    }
+  
+    const closeSidebar = () => {
+      setSidebarOpen(false)
+    }
+  
 
 
 
@@ -26,16 +38,22 @@ const Chat = () => {
 
     return (
     <>
-        <div className="App">
-            <header>
-                <h1>Hola {auth.user.fullName}</h1>
-                <a href={`/`}><h2>Regresar</h2></a>
-            </header>
+    <div className="container">
+      <Navbar sidebarOpen={setSidebarOpen} openSidebar={openSidebar} element={element}/>
+
+    <main>
+    <div className="App">
 
             <section>
                 {auth.authenticate ? <ChatComponent /> : <h1>Debes de tener una cuenta para comenzar a chatear!</h1> }
             </section>
         </div>
+    </main>
+    <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} element={element} />
+
+    </div>
+   
+   
     </>
     )
 }
@@ -66,6 +84,8 @@ const ChatComponent = () =>{
     return (
         <>
             <main className="chatMain">
+                <h1>Inciaste sesión como {auth.user.fullName}</h1>
+                <div className="divisor"></div>
                 {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
                 <div ref={uRef}></div>
                 <span ref={uRef}></span>

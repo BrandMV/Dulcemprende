@@ -5,6 +5,7 @@ import Sidebar from '../../components/Sidebar/Sidebar'
 
 
 const HomePage = (props) => {
+  let element = "Inicio"
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const openSidebar = () => {
     setSidebarOpen(true)
@@ -18,9 +19,9 @@ const HomePage = (props) => {
 
   return(
     <div className="container">
-      <Navbar sidebarOpen={setSidebarOpen} openSidebar={openSidebar} />
+      <Navbar sidebarOpen={setSidebarOpen} openSidebar={openSidebar} element={element}/>
       <Main />
-      <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar}/>
+      <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} element={element} />
     </div>
 
    )

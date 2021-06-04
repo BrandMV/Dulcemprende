@@ -8,8 +8,9 @@ import {
     MaterialInput,
     MaterialButton,
   } from "../MaterialUI/MaterialUI";
-const Sidebar = ({ sidebarOpen, closeSidebar }) => {
+const Sidebar = ({ sidebarOpen, closeSidebar, element}) => {
 
+    let c, i, q, cr, t
     const auth = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const [loginModal, setLoginModal] = useState(false);
@@ -18,6 +19,18 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    if(element === "Chat")
+      c = true
+    if(element === "Inicio")
+      i = true
+    if(element === "Sobre Dulcemprende")
+      q = true
+    if(element === "Sobre los creadores")
+      cr = true
+    if(element === "Tienda"){
+      t = true
+    }
 
     const userSignup = () => {
         const user = { firstName, lastName, email, password};
@@ -62,16 +75,16 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
             </div>
 
             <div className="sidebar__menu">
-                <div className="sidebar__link active_menu_link">
+                <div className={ i ? "sidebar__link active_menu_link": "sidebar__link"}>
                     <i className="fas fa-home"></i>
-                    <a href="#">Administración</a>
+                    <a href={`/`}>Administración</a>
                 </div>
                 <h2>Menú</h2>
-                <div className="sidebar__link">
+                <div className={ t ? "sidebar__link active_menu_link": "sidebar__link"}>
                     <i className="fas fa-store"></i>
                     <a href={`/store`}>Tienda</a>
                 </div>
-                <div className="sidebar__link">
+                <div className={ c ? "sidebar__link active_menu_link": "sidebar__link"}>
                     <i className="fas fa-comments"></i>
                     <a href={`/chat`}>Chat</a>
                 </div>
@@ -81,11 +94,11 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
                     <a href="#" onClick={logout}>Cerrar sesión</a>
                 </div>
                 <h2>Nosotros</h2>
-                <div className="sidebar__link">
+                <div className={ q ? "sidebar__link active_menu_link": "sidebar__link"}>
                     <i className="fas fa-question"></i>
                     <a href="#">¿Qué es Dulcemprende?</a>
                 </div>
-                <div className="sidebar__link">
+                <div className={ cr ? "sidebar__link active_menu_link": "sidebar__link"}>
                     <i className="fas fa-users"></i>
                     <a href="#">Creadores</a>
                 </div>
@@ -98,7 +111,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
 
 const renderNonLoggedInSidebar = () => {
     return (
-        <div className={sidebarOpen ? "sidebar-responsive" : ""} id="sidebar">
+        <div className={sidebarOpen ? "sidebar_responsive" : ""} id="sidebar">
         <div className="sidebar__title">
             <div className="sidebar__img">
                 {/* <img src="" alt="" />pal logo */}
@@ -108,16 +121,16 @@ const renderNonLoggedInSidebar = () => {
         </div>
 
         <div className="sidebar__menu">
-            <div className="sidebar__link active_menu_link">
+            <div className={ i ? "sidebar__link active_menu_link": "sidebar__link"}>
                 <i className="fas fa-home"></i>
-                <a href="#">Administración</a>
+                <a href={`/`}>Administración</a>
             </div>
             <h2>Menú</h2>
-            <div className="sidebar__link">
+            <div className={ t ? "sidebar__link active_menu_link": "sidebar__link"}>
                 <i className="fas fa-store"></i>
                 <a href={`/store`}>Tienda</a>
             </div>
-            <div className="sidebar__link">
+            <div className={ c ? "sidebar__link active_menu_link": "sidebar__link"}>
                 <i className="fas fa-comments"></i>
                 <a href={`/chat`}>Chat</a>
             </div>
@@ -137,11 +150,11 @@ const renderNonLoggedInSidebar = () => {
               }}>Registrate!</a>
             </div>
             <h2>Nosotros</h2>
-            <div className="sidebar__link">
+            <div className={ q ? "sidebar__link active_menu_link": "sidebar__link"}>
                 <i className="fas fa-question"></i>
                 <a href="#">¿Qué es Dulcemprende?</a>
             </div>
-            <div className="sidebar__link">
+            <div className={ cr ? "sidebar__link active_menu_link": "sidebar__link"}>
                 <i className="fas fa-users"></i>
                 <a href="#">Creadores</a>
             </div>

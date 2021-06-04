@@ -5,101 +5,123 @@ import { getOrders } from "../../actions";
 import Layout from "../../components/Layout/Layout";
 import Card from "../../components/UI/Card/Card";
 import { IoIosArrowForward } from "react-icons/io";
-import { generatePublicUrl } from '../../urlConfig';
-
+import { generatePublicUrl } from "../../urlConfig";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import Navbar from "../../components/Navbar/Navbar";
 import "./style.css";
 import { Breed } from "../../components/MaterialUI/MaterialUI";
-let tot = 0
+let tot = 0;
 const OrderPage = (props) => {
+  let element = "Tienda";
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const openSidebar = () => {
+    setSidebarOpen(true);
+  };
+
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-const [total, setTotal] = useState()
+  const [total, setTotal] = useState();
   useEffect(() => {
     dispatch(getOrders());
   }, []);
 
   console.log(user);
   const handleTotal = () => {
-    {user.orders.map((order) => {
-      order.items.map((item,key) => {
-        tot = tot + item.payablePrice*item.purchasedQty;
-      })
-    })}
-    setTotal(tot)
-    tot = 0
+    {
+      user.orders.map((order) => {
+        order.items.map((item, key) => {
+          tot = tot + item.payablePrice * item.purchasedQty;
+        });
+      });
+    }
+    setTotal(tot);
+    tot = 0;
     console.log(total);
-  
-}
-console.log(user);
-
+  };
+  console.log(user);
 
   return (
-    <Layout>
+    <div className="container">
+      <Navbar
+        sidebarOpen={setSidebarOpen}
+        openSidebar={openSidebar}
+        element={element}
+      />
 
-      <div style={{ maxWidth: "1160px", margin: "5px auto" }}>
-        <Breed
-          breed={[
-            { name: "Tienda", href: "/" },
-            { name: "Ordenes", href: "/account/orders" },
-          ]}
-          breedIcon={<IoIosArrowForward />}
-        />
-        {user.orders.map((order) => {
-          return order.items.map((item, key) => (
-            <Card key={key} style={{ display: "block", margin: "5px 0" }}>
-              <Link
-                to={`/order_details/${order._id}`}
-                className="orderItemContainer"
-              >
-                <div className="orderImgContainer">
-                  <img
-                    className="orderImg"
-                    src={generatePublicUrl(item.productId.productPictures[0].img)}
-                  />
-                </div>
-                <div className="orderRow">
-                  <div className="orderName">{item.productId.name}</div>
-                  <div className="orderPrice">
-                 
-                    {item.payablePrice * item.purchasedQty} MXN
+      <main>
+        <Layout>
+          <div className="small-container">
+          <h1>Ordenes</h1>
+
+          </div>
+          <div className="fle">
+            {user.orders.map((order) => {
+              return order.items.map((item, key) => (
+                <div className="small-container" key={key}>
+                  <div className="row">
+                  <Link
+                    to={`/order_details/${order._id}`}
+                    className="col-4"
+                  >
+                      <img
+                        src={generatePublicUrl(
+                          item.productId.productPictures[0].img
+                        )}
+                      />
+                      <h4>{item.productId.name}</h4>
+                      <p>
+                        {item.payablePrice * item.purchasedQty} MXN
+                      </p>
+                      <p>
+                        Orden ID: {order._id}
+                      </p>
+                  </Link>
                   </div>
-                
-                </div>
-              </Link>
 
-            </Card>
+                </div>
+              ));
+            })}
+         
+          </div>
             
-          ));
-        })}
-      </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-    </Layout>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+        </Layout>
+      </main>
+      <Sidebar
+        sidebarOpen={sidebarOpen}
+        closeSidebar={closeSidebar}
+        element={element}
+      />
+    </div>
   );
 };
 

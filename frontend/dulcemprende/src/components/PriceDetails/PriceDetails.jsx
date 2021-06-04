@@ -12,7 +12,7 @@ const PriceDetails = (props) => {
               </tr>
               <tr>
                 <td>Envio</td>
-                <td>{props.totalPrice > 800 ? "Envio gratis" : "Envio: 99MXN"}</td>
+                <td>{props.totalPrice > 800 ? "Envio gratis" : "99MXN"}</td>
               </tr>
               <tr>
                 <td>Total</td>

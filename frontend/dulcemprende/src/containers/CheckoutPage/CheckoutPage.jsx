@@ -2,20 +2,17 @@ import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addOrder, getAddress, getCartItems } from "../../actions";
 import Layout from "../../components/Layout/Layout";
-import {
-  Anchor,
-  MaterialButton,
-} from "../../components/MaterialUI/MaterialUI";
+import { Anchor, MaterialButton } from "../../components/MaterialUI/MaterialUI";
 import PriceDetails from "../../components/PriceDetails/PriceDetails";
 import Card from "../../components/UI/Card/Card";
 import CartPage from "../CartPage/CartPage";
 import AddressForm from "./AddressForm";
-import PayPal from "../../components/Paypal/PayPal"
-
+import PayPal from "../../components/Paypal/PayPal";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import Navbar from "../../components/Navbar/Navbar";
 import "./style.css";
 
-let total
-
+let total;
 
 const CheckoutStep = (props) => {
   return (
@@ -42,7 +39,7 @@ const Address = ({
   onAddressSubmit,
 }) => {
   return (
-    <div className="flexRow addressContainer">
+    <div className="addressContainer">
       <div>
         <input name="address" onClick={() => selectAddress(adr)} type="radio" />
       </div>
@@ -57,7 +54,7 @@ const Address = ({
               </div>
               {adr.selected && (
                 <Anchor
-                  name="EDIT"
+                  name="Editar"
                   onClick={() => enableAddressEditForm(adr)}
                   style={{
                     fontWeight: "500",
@@ -94,6 +91,15 @@ const Address = ({
 };
 
 const CheckoutPage = (props) => {
+  let element = "Tienda";
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const openSidebar = () => {
+    setSidebarOpen(true);
+  };
+
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
   const user = useSelector((state) => state.user);
   const auth = useSelector((state) => state.auth);
   const [newAddress, setNewAddress] = useState(false);
@@ -104,11 +110,9 @@ const CheckoutPage = (props) => {
   const [orderConfirmation, setOrderConfirmation] = useState(false);
   const [paymentOption, setPaymentOption] = useState(false);
   const [confirmOrder, setConfirmOrder] = useState(false);
-  const [paypalButtons, setPaypalButtons] = useState(false)
+  const [paypalButtons, setPaypalButtons] = useState(false);
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
- 
-
 
   const onAddressSubmit = (addr) => {
     setSelectedAddress(addr);
@@ -145,7 +149,7 @@ const CheckoutPage = (props) => {
     setPaymentOption(true);
   };
 
-const onConfirmOrder = () => {
+  const onConfirmOrder = () => {
     const totalAmount = Object.keys(cart.cartItems).reduce(
       (totalPrice, key) => {
         const { price, qty } = cart.cartItems[key];
@@ -193,169 +197,205 @@ const onConfirmOrder = () => {
   }, [user.placedOrderId]);
 
   return (
-    <Layout>
-      <div className="cartContainer" style={{ alignItems: "flex-start" }}>
-        <div className="checkoutContainer">
-          {/* check if user logged in or not */}
-          <CheckoutStep
-            stepNumber={"1"}
-            title={"Inicia sesión"}
-            active={!auth.authenticate}
-            body={
-              auth.authenticate ? (
-                <div className="loggedInId">
-                  <span style={{ fontWeight: 500 }}>{auth.user.fullName}</span>
-                  <span style={{ margin: "0 5px" }}>{auth.user.email}</span>
-                </div>
-              ) : (
-                <div>
-                  <p>Debes iniciar sesión</p>
-                </div>
-              )
-            }
-          />
-          <CheckoutStep
-            stepNumber={"2"}
-            title={"Dirección de envio"}
-            active={!confirmAddress && auth.authenticate}
-            body={
-              <>
-                {confirmAddress ? (
-                  <div className="stepCompleted">{`${selectedAddress.name} ${selectedAddress.address} - ${selectedAddress.pinCode}`}</div>
-                ) : (
-                  address.map((adr) => (
-                    <Address
-                      selectAddress={selectAddress}
-                      enableAddressEditForm={enableAddressEditForm}
-                      confirmDeliveryAddress={confirmDeliveryAddress}
-                      onAddressSubmit={onAddressSubmit}
-                      adr={adr}
-                    />
-                  ))
-                )}
-              </>
-            }
-          />
+    <div className="container">
+      <Navbar
+        sidebarOpen={setSidebarOpen}
+        openSidebar={openSidebar}
+        element={element}
+      />
 
-          {/* AddressForm */}
-          {confirmAddress ? null : newAddress ? (
-            <AddressForm onSubmitForm={onAddressSubmit} onCancel={() => {}} />
-          ) : auth.authenticate ? (
-            <CheckoutStep
-              stepNumber={"+"}
-              title={"Añadir dirección"}
-              active={false}
-              onClick={() => setNewAddress(true)}
-            />
-          ) : null}
+      <main>
+        <Layout>
+          <div className="cartContainer" style={{alignItems: "center" }}>
+            <div className="checkoutContainer">
+              {/* check if user logged in or not */}
+              <CheckoutStep
+                stepNumber={"1"}
+                title={"Inicia sesión"}
+                active={!auth.authenticate}
+                body={
+                  auth.authenticate ? (
+                    <div className="loggedInId">
+                      <span style={{ fontWeight: 500 }}>
+                        {auth.user.fullName}
+                      </span>
+                      <span style={{ margin: "0 5px" }}>{auth.user.email}</span>
+                    </div>
+                  ) : (
+                    <div>
+                      <p>Debes iniciar sesión</p>
+                    </div>
+                  )
+                }
+              />
+              <CheckoutStep
+                stepNumber={"2"}
+                title={"Dirección de envio"}
+                active={!confirmAddress && auth.authenticate}
+                body={
+                  <>
+                    {confirmAddress ? (
+                      <div className="stepCompleted">{`${selectedAddress.name} ${selectedAddress.address} - ${selectedAddress.pinCode}`}</div>
+                    ) : (
+                      address.map((adr) => (
+                        <Address
+                          selectAddress={selectAddress}
+                          enableAddressEditForm={enableAddressEditForm}
+                          confirmDeliveryAddress={confirmDeliveryAddress}
+                          onAddressSubmit={onAddressSubmit}
+                          adr={adr}
+                        />
+                      ))
+                    )}
+                  </>
+                }
+              />
 
-          <CheckoutStep
-            stepNumber={"3"}
-            title={"Resumen de orden"}
-            active={orderSummary}
-            body={
-              orderSummary ? (
-                <CartPage onlyCartItems={true} />
-              ) : orderConfirmation ? (
-                <div className="stepCompleted">
-                  {Object.keys(cart.cartItems).length} items
-                </div>
-              ) : null
-            }
-          />
-
-          {orderSummary && (
-            <Card
-              style={{
-                margin: "10px 0",
-              }}
-            >
-              <div
-                className="flexRow sb"
-                style={{
-                  padding: "20px",
-                  alignItems: "center",
-                }}
-              >
-                <p style={{ fontSize: "12px" }}>
-                  La confirmación será enviada a {" "}
-                  <strong>{auth.user.email}</strong>
-                </p>
-                <MaterialButton
-                  title="Continuar"
-                  onClick={userOrderConfirmation}
-                  style={{
-                    width: "200px",
-                  }}
+              {/* AddressForm */}
+              {confirmAddress ? null : newAddress ? (
+                <AddressForm
+                  onSubmitForm={onAddressSubmit}
+                  onCancel={() => {}}
                 />
-              </div>
-            </Card>
-          )}
+              ) : auth.authenticate ? (
+                <CheckoutStep
+                  stepNumber={"+"}
+                  title={"Añadir dirección"}
+                  active={false}
+                  onClick={() => setNewAddress(true)}
+                />
+              ) : null}
 
-          <CheckoutStep
-            stepNumber={"4"}
-            title={"Opciones de pago"}
-            active={paymentOption}
-            body={
-              paymentOption && (
-                <div>
+              <CheckoutStep
+                stepNumber={"3"}
+                title={"Resumen de orden"}
+                active={orderSummary}
+                body={
+                  orderSummary ? (
+                    <CartPage onlyCartItems={true} />
+                  ) : orderConfirmation ? (
+                    <div className="stepCompleted">
+                      {Object.keys(cart.cartItems).length} items
+                    </div>
+                  ) : null
+                }
+              />
+
+              {orderSummary && (
+                <Card
+                  style={{
+                    margin: "10px 0",
+                  }}
+                >
                   <div
-                    className="flexRow"
+                    className="flexRow sb"
                     style={{
-                      alignItems: "center",
                       padding: "20px",
+                      alignItems: "center",
                     }}
                   >
-                    <input type="radio" name="paymentOption" value="paypal" onClick={() => setPaypalButtons(true)}/>
-                    <div>Paypal</div>
-                    {paypalButtons ? <PayPal onConfirmOrder={onConfirmOrder}/> : ""}
+                    <p style={{ fontSize: "12px" }}>
+                      La confirmación será enviada a{" "}
+                      <strong>{auth.user.email}</strong>
+                    </p>
+                    <MaterialButton
+                      title="Continuar"
+                      onClick={userOrderConfirmation}
+                      style={{
+                        width: "200px",
+                      }}
+                    />
                   </div>
-                  <MaterialButton
-                    title="Confirmar orden"
-                    onClick={onConfirmOrder}
-                    style={{
-                      width: "200px",
-                      margin: "0 0 20px 20px",
-                    }}
-                  />
-                </div>
-              )
-            }
-          />
-        </div>
+                </Card>
+              )}
 
-        {/* Price Component */}
-        <PriceDetails
-          totalItem={Object.keys(cart.cartItems).reduce(function (qty, key) {
-            return qty + cart.cartItems[key].qty;
-          }, 0)}
-          totalPrice={Object.keys(cart.cartItems).reduce((totalPrice, key) => {
-            const { price, qty } = cart.cartItems[key];
-            return totalPrice + price * qty;
-          }, 0)}
-        />
-      </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-    </Layout>
+              <CheckoutStep
+                stepNumber={"4"}
+                title={"Opciones de pago"}
+                active={paymentOption}
+                body={
+                  paymentOption && (
+                    <div>
+                      <div
+                        className="flexRow"
+                        style={{
+                          alignItems: "center",
+                          padding: "20px",
+                        }}
+                      >
+                        <input
+                          type="radio"
+                          name="paymentOption"
+                          value="paypal"
+                          onClick={() => setPaypalButtons(true)}
+                        />
+                        <div>Paypal</div>
+                        {paypalButtons ? (
+                          <PayPal onConfirmOrder={onConfirmOrder} />
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                      <MaterialButton
+                        title="Confirmar orden"
+                        onClick={onConfirmOrder}
+                        style={{
+                          width: "200px",
+                          margin: "0 0 20px 20px",
+                        }}
+                      />
+                    </div>
+                  )
+                }
+              />
+            </div>
+
+            {/* Price Component */}
+            <PriceDetails
+              totalItem={Object.keys(cart.cartItems).reduce(function (
+                qty,
+                key
+              ) {
+                return qty + cart.cartItems[key].qty;
+              },
+              0)}
+              totalPrice={Object.keys(cart.cartItems).reduce(
+                (totalPrice, key) => {
+                  const { price, qty } = cart.cartItems[key];
+                  return totalPrice + price * qty;
+                },
+                0
+              )}
+              
+            />
+          </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+        </Layout>
+      </main>
+      <Sidebar
+        sidebarOpen={sidebarOpen}
+        closeSidebar={closeSidebar}
+        element={element}
+      />
+    </div>
   );
 };
 
 export default CheckoutPage;
-

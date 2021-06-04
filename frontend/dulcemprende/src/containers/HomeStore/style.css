@@ -57,6 +57,7 @@
     width: 100%;
 
   }
+ 
   .headerStore row{
     margin-top: 70px;
   }
@@ -133,5 +134,8 @@
   }
   .col-2, .col-3, .col-4{
     flex-basis: 100%;
+  }
+  .Hcontainer{
+    width: 100%;
   }
 }

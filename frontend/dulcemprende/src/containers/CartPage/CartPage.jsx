@@ -4,11 +4,21 @@ import Layout from "../../components/Layout/Layout";
 import CartItem from "./CartItem/CartItem";
 import { addToCart, getCartItems, removeCartItem } from "../../actions";
 import PriceDetails from "../../components/PriceDetails/PriceDetails";
-
+import Sidebar from "../../components/Sidebar/Sidebar";
+import Navbar from "../../components/Navbar/Navbar";
 import "./style.css";
 import { MaterialButton } from "../../components/MaterialUI/MaterialUI";
 
 const CartPage = (props) => {
+  let element = "Tienda";
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const openSidebar = () => {
+    setSidebarOpen(true);
+  };
+
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
   const cart = useSelector((state) => state.cart);
   const auth = useSelector((state) => state.auth);
   // const cartItems = cart.cartItems;
@@ -72,51 +82,73 @@ const CartPage = (props) => {
   }
 
   return (
-    <Layout>
-      <br />
-      <br />
-      <br />
-      <div className="small-container cart-page">
-        <table>
-          <tr>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Total</th>
-          </tr>
-          {Object.keys(cartItems).map((key, index) => (
-            <CartItem
-              key={index}
-              cartItem={cartItems[key]}
-              onQuantityInc={onQuantityIncrement}
-              onQuantityDec={onQuantityDecrement}
-              onRemoveCartItem={onRemoveCartItem}
-            />
-          ))}
-        </table>
-        <PriceDetails
-          totalItem={Object.keys(cart.cartItems).reduce(function (qty, key) {
-            return qty + cart.cartItems[key].qty;
-          }, 0)}
-          totalPrice={Object.keys(cart.cartItems).reduce((totalPrice, key) => {
-            const { price, qty } = cart.cartItems[key];
-            return totalPrice + price * qty;
-          }, 0)}
-        />
-      <br />
-      <br />
+    <div className="container">
+      <Navbar
+        sidebarOpen={setSidebarOpen}
+        openSidebar={openSidebar}
+        element={element}
+      />
 
-        <MaterialButton
-          title="Pagar"
-          onClick={() => props.history.push(`/checkout`)}
-        />
-      </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-    </Layout>
+      <main>
+        <Layout>
+          <br />
+          <br />
+          <br />
+          <div className="small-container cart-page">
+            <table>
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+              </tr>
+              {Object.keys(cartItems).map((key, index) => (
+                <CartItem
+                  key={index}
+                  cartItem={cartItems[key]}
+                  onQuantityInc={onQuantityIncrement}
+                  onQuantityDec={onQuantityDecrement}
+                  onRemoveCartItem={onRemoveCartItem}
+                />
+              ))}
+            </table>
+            <PriceDetails
+              totalItem={Object.keys(cart.cartItems).reduce(function (
+                qty,
+                key
+              ) {
+                return qty + cart.cartItems[key].qty;
+              },
+              0)}
+              totalPrice={Object.keys(cart.cartItems).reduce(
+                (totalPrice, key) => {
+                  const { price, qty } = cart.cartItems[key];
+                  return totalPrice + price * qty;
+                },
+                0
+              )}
+            />
+            <br />
+            <br />
+
+            <MaterialButton
+              title="Pagar"
+              onClick={() => props.history.push(`/checkout`)}
+            />
+          </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+        </Layout>
+      </main>
+      <Sidebar
+        sidebarOpen={sidebarOpen}
+        closeSidebar={closeSidebar}
+        element={element}
+      />
+    </div>
   );
 };
 

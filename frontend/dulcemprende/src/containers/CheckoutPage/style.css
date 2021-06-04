@@ -1,11 +1,20 @@
+.cartContainer{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
 .checkoutContainer{
-    width: calc(100% - 400px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .checkoutStep{
     box-sizing: border-box;
     background: #fff;
     box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.2);
     margin-bottom: 10px;
+    width: auto;
 }
 .checkoutHeader{
     width: 100%;
@@ -14,6 +23,7 @@
 }
 .checkoutHeader.active{
     background: #2874f0;
+    text-align: center;
 }
 .checkoutHeader .stepNumber{
     display: inline-block;
@@ -21,7 +31,7 @@
     background: #eee;
     color: #2874f0;
     border-radius: 3px;
-    font-size: 12px;
+    font-size: 20px;
     box-sizing: border-box;
     padding: 3px 7px;
 }
@@ -30,7 +40,7 @@
 }
 .stepTitle{
     display: inline-block;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 500;
     color: #878787;
     margin-left: 15px;
@@ -39,7 +49,7 @@
     color: #fff;
 }
 .loggedInId{
-    font-size: 12px;
+    font-size: 20px;
     margin: 0px 0 10px 60px;
 }
 
@@ -61,7 +71,7 @@
     padding-bottom: 20px;
     font-weight: 600;
     font-family: 'Roboto';
-    font-size: 12px;
+    font-size: 20px;
     color: #333;
 }
 .addressType{
@@ -71,16 +81,19 @@
     background: #eee;
     font-weight: 500;
     padding: 1px 5px;
-    font-size: 10px;
+    font-size: 20px;
     border-radius: 2px;
     color: #777777;
 }
 .fullAddress{
-    font-size: 12px;
+    font-size: 20px;
     letter-spacing: 1px;
     line-height: 18px;
 }
 .stepCompleted{
     padding: 0 0 20px 60px;
-    font-size: 12px;
+    font-size: 20px;
 }
+
+
+/* @media only screen and (max-width:) */

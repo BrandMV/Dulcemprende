@@ -173,7 +173,7 @@ const AddressForm = (props) => {
             <div>
               <input
                 type="radio"
-                onClick={() => setAddressType("home")}
+                onClick={() => setAddressType("Casa")}
                 name="addressType"
                 value="Casa"
               />
@@ -182,7 +182,7 @@ const AddressForm = (props) => {
             <div>
               <input
                 type="radio"
-                onClick={() => setAddressType("work")}
+                onClick={() => setAddressType("Trabajo")}
                 name="addressType"
                 value="Trabajo"
               />
@@ -213,7 +213,7 @@ const AddressForm = (props) => {
       <div className={`checkoutHeader`}>
         <div>
           <span className="stepNumber">+</span>
-          <span className="stepTitle">{"ADD NEW ADDRESS"}</span>
+          <span className="stepTitle">{"Añdir nueva dirección"}</span>
         </div>
       </div>
       <div

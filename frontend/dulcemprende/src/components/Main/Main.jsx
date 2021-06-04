@@ -143,7 +143,11 @@ const Main = () => {
   };
 
   const nonLoggedInMain = () => {
-    return <h1>Algo bonito de inicio</h1>;
+    return (
+      <div>
+        <h1>Hola</h1>
+      </div>
+    );
   };
 
   return <main>{auth.authenticate ? loggedInMain() : nonLoggedInMain()}</main>;
