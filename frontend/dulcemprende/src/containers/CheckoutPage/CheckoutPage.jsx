@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addOrder, getAddress, getCartItems } from "../../actions";
 import Layout from "../../components/Layout/Layout";
@@ -10,9 +10,11 @@ import PriceDetails from "../../components/PriceDetails/PriceDetails";
 import Card from "../../components/UI/Card/Card";
 import CartPage from "../CartPage/CartPage";
 import AddressForm from "./AddressForm";
+import PayPal from "../../components/Paypal/PayPal"
 
 import "./style.css";
 
+let total
 
 
 const CheckoutStep = (props) => {
@@ -102,8 +104,11 @@ const CheckoutPage = (props) => {
   const [orderConfirmation, setOrderConfirmation] = useState(false);
   const [paymentOption, setPaymentOption] = useState(false);
   const [confirmOrder, setConfirmOrder] = useState(false);
+  const [paypalButtons, setPaypalButtons] = useState(false)
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+ 
+
 
   const onAddressSubmit = (addr) => {
     setSelectedAddress(addr);
@@ -158,7 +163,7 @@ const onConfirmOrder = () => {
       totalAmount,
       items,
       paymentStatus: "pending",
-      paymentType: "cod",
+      paymentType: "paypal",
     };
 
     console.log(payload);
@@ -301,8 +306,9 @@ const onConfirmOrder = () => {
                       padding: "20px",
                     }}
                   >
-                    <input type="radio" name="paymentOption" value="cod" />
+                    <input type="radio" name="paymentOption" value="paypal" onClick={() => setPaypalButtons(true)}/>
                     <div>Paypal</div>
+                    {paypalButtons ? <PayPal onConfirmOrder={onConfirmOrder}/> : ""}
                   </div>
                   <MaterialButton
                     title="Confirmar orden"
