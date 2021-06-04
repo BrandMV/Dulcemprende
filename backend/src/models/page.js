@@ -1,7 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const pageSchema = new mongoose.Schema({
-
-    title:{
+    title: {
         type: String,
         required: true,
         trim: true
@@ -13,29 +12,28 @@ const pageSchema = new mongoose.Schema({
     },
     banners: [
         {
-            img: {type: String},
-            navigateTo: {type: String}
- 
+            img: { type: String },
+            navigateTo: { type: String }
         }
     ],
     products: [
         {
-            img: {type: String},
-            navigateTo: {type: String}
-            
+            img: { type: String },
+            navigateTo: { type: String }
         }
     ],
-    category: { type: mongoose.Schema.Types.ObjectId,
-         ref: 'Category',
-         required: true,
-         unique: true
+    category: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Category', 
+        required: true ,
+        unique: true
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     }
-    
-}, {timestamps:true})
+}, { timestamps: true });
 
-module.exports = mongoose.model('Page', pageSchema)
+
+module.exports = mongoose.model('Page', pageSchema);

@@ -7,14 +7,13 @@ exports.signup = (req, res) => {
   User.findOne({ email: req.body.email }).exec((error, user) => {
     if (user)
       return res.status(400).json({
-        message: "Admin already registered",
+        message: "Ya te has registrado",
       });
 
     User.estimatedDocumentCount(async (err, count) => {
       if (err) return res.status(400).json({ error });
 
       const { firstName, lastName, email, password } = req.body;
-      console.log(req);
       const hash_password = await bcrypt.hash(password, 10);
       const _user = new User({
         firstName,
@@ -28,13 +27,13 @@ exports.signup = (req, res) => {
       _user.save((error, data) => {
         if (error) {
           return res.status(400).json({
-            message: "Something went wrong",
+            message: "Algo salió mal. Intenta de nuevo",
           });
         }
 
         if (data) {
           return res.status(201).json({
-            message: "Admin created Successfully..!",
+            message: "Registro como administrador exitoso!",
           });
         }
       });
@@ -64,11 +63,11 @@ exports.signin = (req, res) => {
         });
       } else {
         return res.status(400).json({
-          message: "Invalid Password",
+          message: "Contraseña incorrecta",
         });
       }
     } else {
-      return res.status(400).json({ message: "Something went wrong" });
+      return res.status(400).json({ message: "Algo salio mal, intenta de nuevo" });
     }
   });
 };
@@ -76,6 +75,6 @@ exports.signin = (req, res) => {
 exports.signout = (req, res) => {
   res.clearCookie("token");
   res.status(200).json({
-    message: "Signout successfully...!",
+    message: "Cerraste sesión con éxito!",
   });
 };
