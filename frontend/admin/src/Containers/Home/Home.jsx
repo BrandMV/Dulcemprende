@@ -1,14 +1,11 @@
-
 import React from 'react'
-import Layout from '../../components/Diseño/Layout'
-import './style.css'
+import Layout from '../../components/Layout/Layout'
+
 const Home = () => {
     return (
-        <div>
-            <Layout sidebar>
-              
-            </Layout>
-        </div>
+        <Layout sidebar>
+            HOME
+        </Layout>
     )
 }
 

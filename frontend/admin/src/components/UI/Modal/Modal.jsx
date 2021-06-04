@@ -3,8 +3,8 @@ import { Modal, Button } from "react-bootstrap";
 
 const NewModal = (props) => {
   return (
-    <Modal   size={props.size} show={props.show} onHide={props.handleClose}>
-      <Modal.Header closeButton >
+    <Modal size={props.size} show={props.show} onHide={props.handleClose}>
+      <Modal.Header closeButton>
         <Modal.Title>{props.modalTitle}</Modal.Title>
       </Modal.Header>
       <Modal.Body>{props.children}</Modal.Body>
@@ -14,11 +14,18 @@ const NewModal = (props) => {
             <Button key={index} variant={btn.color} onClick={btn.onClick}>
               {btn.label}
             </Button>
-          ))):(
-          <Button  variant="primary"  {...props}  className="btn-sm" onClick={props.onSubmit} style={{backgroundColor: "#0a1931"}}>
-              Listo
-            </Button>
-          )}
+          ))
+        ) : (
+          <Button
+            variant="primary"
+            {...props}
+            style={{ backgroundColor: "#333" }}
+            className="btn-sm"
+            onClick={props.onSubmit}
+          >
+            Listo
+          </Button>
+        )}
       </Modal.Footer>
     </Modal>
   );

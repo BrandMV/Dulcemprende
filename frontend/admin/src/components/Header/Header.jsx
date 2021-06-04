@@ -1,45 +1,46 @@
 import React from "react";
-import { Nav, Navbar, Container } from "react-bootstrap";
+import { Navbar, Nav, Container } from "react-bootstrap";
 import { NavLink, Link } from "react-router-dom";
-import {useSelector, useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 import { signout } from "../../actions";
 
-const Header = () => {
-
-  const auth = useSelector(state => state.auth)
-  const dispatch = useDispatch()
+const Header = (props) => {
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const logout = () => {
-    dispatch(signout())
-  }
+    dispatch(signout());
+  };
 
   const renderLoggedInLinks = () => {
     return (
-      <Nav style={{ margin: 'auto'}}>
+      <Nav>
         <li className="nav-item">
-          <span className="nav-link" onClick={logout} >Cerrar Sesión</span>
+          <span className="nav-link" onClick={logout}>
+            Cerrar sesión
+          </span>
         </li>
       </Nav>
     );
   };
 
-  const renderNonLoggedInLinks = () =>{
-    return(
-      <Nav style={{ margin: 'auto' }}>
-      {/* <Nav.Link href="#deets">Inciar Sesión</Nav.Link> */}
-      <li className="nav-item">
-        <NavLink to="signup" className="nav-link">
-          Registrate
-        </NavLink>
-      </li>
-      <li className="nav-item">
-        <NavLink to="signin" className="nav-link">
-          Iniciar Sesión
-        </NavLink>
-      </li>
-    </Nav>
-    )
-  }
+  const renderNonLoggedInLinks = () => {
+    return (
+      <Nav>
+        {/* <Nav.Link href="#deets">Signin</Nav.Link> */}
+        <li className="nav-item">
+          <NavLink to="signin" className="nav-link">
+            Iniciar sesión
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink to="signup" className="nav-link">
+            Registrate
+          </NavLink>
+        </li>
+      </Nav>
+    );
+  };
 
   return (
     <Navbar
@@ -51,13 +52,14 @@ const Header = () => {
       style={{ zIndex: 1 }}
     >
       <Container fluid>
-        {/* <Navbar.Brand href="#home">Panel de Administrador</Navbar.Brand> */}
         <Link to="/" className="navbar-brand">
-          Panel de Administrador
+          Panel de administrador
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-  
+          <Nav className="mr-auto">
+
+          </Nav>
           {auth.authenticate ? renderLoggedInLinks() : renderNonLoggedInLinks()}
         </Navbar.Collapse>
       </Container>
