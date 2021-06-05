@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./main.css";
+import "./nonLogged.css";
 import { addStatistics, getOrders, getStatistics } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
+import mano from "../../images/mano.svg"
+import chat from "../../images/chat.svg"
+import shopping from "../../images/shopping.svg"
+import admin from "../../images/admin.svg"
+import Footer from "../Footer/Footer";
+import MainNonLogged from "../MainNonLogged/MainNonLogged";
 let tot = 0;
 let tot2 = 0;
 let earn = 0;
@@ -162,10 +169,9 @@ const onSubmitStatistics = () => {
 
   const nonLoggedInMain = () => {
     return (
-      <div>
-        <h1>Hola</h1>
-      </div>
-    );
+      <MainNonLogged />
+
+    )
   };
 
   return <main>{auth.authenticate ? loggedInMain() : nonLoggedInMain()}</main>;
