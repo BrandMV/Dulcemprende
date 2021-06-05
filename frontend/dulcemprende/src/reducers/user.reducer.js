@@ -3,11 +3,13 @@ import { userConstants } from "../actions/constants";
 const initState = {
   address: [],
   orders: [],
+  statistics: [],
   orderDetails: {},
   error: null,
   loading: false,
   orderFetching: false,
   placedOrderId: null,
+  statisticsFetching: false,
 };
 
 export default (state = initState, action) => {
@@ -52,6 +54,46 @@ export default (state = initState, action) => {
         error: action.payload.error,
       };
       break;
+    case userConstants.GET_USER_STATISTICS_REQUEST:
+      state = {
+        ...state,
+        statisticsFetching: true,
+      }
+      break;
+    case userConstants.GET_USER_STATISTICS_SUCCESS:
+      state = {
+        ...state,
+        statistics: action.payload.statistics,
+        statisticsFetching: false,
+      }
+      break;
+    case userConstants.GET_USER_STATISTICS_FAILURE:
+      state ={
+        ...state,
+        statisticsFetching: false,
+        error: action.payload.error,
+      }
+      break;
+    case userConstants.ADD_USER_STATISTICS_REQUEST:
+      state = {
+        ...state,
+        loading: true,
+      }
+      break;
+    case userConstants.ADD_USER_STATISTICS_SUCCESS:
+      state = {
+        ...state,
+        statistics: action.payload.statistics,
+        loading: false,
+      }
+      break;
+    case userConstants.ADD_USER_STATISTICS_FAILURE:
+      state = {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+      }
+      break
     case userConstants.GET_USER_ORDER_REQUEST:
       state = {
         ...state,

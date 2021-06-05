@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./main.css";
-import { getOrders } from "../../actions";
+import { addStatistics, getOrders, getStatistics } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 let tot = 0;
 let tot2 = 0;
 let earn = 0;
 let totSell = 0;
+let profit = 0
 const Main = () => {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -17,7 +18,23 @@ const Main = () => {
   const [totalSell, setTotalSell] = useState(0);
   useEffect(() => {
     dispatch(getOrders());
+    dispatch(getStatistics())
   }, []);
+  console.log(user);
+
+const onSubmitStatistics = () => {
+  let profit = totSell
+  let selled = earn
+  const payload = {
+    statistics: {
+      invest,
+      profit,
+      selled,
+    },
+  }
+  console.log(payload);
+  dispatch(addStatistics(payload))
+}
 
   useEffect(() => {
     {
@@ -55,6 +72,7 @@ const Main = () => {
       JSON.stringify(totSell)
     );
     setSell("");
+    onSubmitStatistics()
   };
   const handleUpdateEarned = () => {
     setTotalSell(

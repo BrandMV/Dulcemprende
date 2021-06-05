@@ -140,3 +140,54 @@ export const getOrder = (payload) => {
   };
 };
 
+export const getStatistics = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: userConstants.GET_USER_STATISTICS_REQUEST })
+      const res = await axios.post(`/user/getStatistics`)
+      if(res.status === 200){
+        console.log(res);
+        const{ statistics } = res.data
+        dispatch({
+          type: userConstants.GET_USER_STATISTICS_SUCCESS,
+          payload: { statistics },
+        })
+      }else{
+        const { error } = res.data
+        dispatch({
+          type: userConstants.GET_USER_STATISTICS_FAILURE,
+          payload: { error }
+        })
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+export const addStatistics = (payload) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.post(`/user/statistics/create`, { payload })
+      dispatch({ type: userConstants.ADD_USER_STATISTICS_REQUEST })
+      if(res.status === 201){
+        const {
+          statistics: { statistics },
+        } = res.data
+        dispatch({
+          type: userConstants.ADD_USER_STATISTICS_SUCCESS,
+          payload: {statistics},
+        })
+      } else{
+        const { error } = res.data
+        dispatch({
+          type: userConstants.ADD_USER_STATISTICS_FAILURE,
+          payload: {error}
+        })
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+

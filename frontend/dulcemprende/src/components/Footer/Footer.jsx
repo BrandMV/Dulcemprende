@@ -10,7 +10,7 @@ const Footer = () => {
                         <h3>Checa el repositorio!</h3>
                         <p>Puedes ver el repositorio del proyecto</p>
                         <div className="app-logo">
-                        <i className="fab fa-github"></i>
+                        <a href="https://github.com/BrandMV/Dulcemprende"><i className="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div className="footer-col-2">
