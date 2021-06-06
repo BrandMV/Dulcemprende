@@ -91,16 +91,16 @@ const Sidebar = ({ sidebarOpen, closeSidebar, element}) => {
                 <h2>Usuario</h2>
                 <div className="sidebar__link">
                     <i className="fas fa-sign-out-alt"></i>
-                    <a href={`/about`} onClick={logout}>Cerrar sesión</a>
+                    <a href="#" onClick={logout}>Cerrar sesión</a>
                 </div>
                 <h2>Nosotros</h2>
                 <div className={ q ? "sidebar__link active_menu_link": "sidebar__link"}>
                     <i className="fas fa-question"></i>
-                    <a href="#">¿Qué es Dulcemprende?</a>
+                    <a href={`/about`}>¿Qué es Dulcemprende?</a>
                 </div>
                 <div className={ cr ? "sidebar__link active_menu_link": "sidebar__link"}>
                     <i className="fas fa-users"></i>
-                    <a href="#">Creadores</a>
+                    <a href={`/about-creators`}>Creadores</a>
                 </div>
               
             </div>
@@ -156,7 +156,7 @@ const renderNonLoggedInSidebar = () => {
             </div>
             <div className={ cr ? "sidebar__link active_menu_link": "sidebar__link"}>
                 <i className="fas fa-users"></i>
-                <a href="#">Creadores</a>
+                <a href={`/about-creators`}>Creadores</a>
             </div>
           
         </div>

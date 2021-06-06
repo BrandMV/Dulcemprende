@@ -6,14 +6,16 @@ import Footer from '../Footer/Footer'
 const About = () => {
     return (
         <>
+    <div className="sAbout">
 
-        <section className="about" id="about">
+  
+        <div className="about" id="about">
             <h1 className="heading">Sobre Dulcemprende</h1>
             <div className="column">
                 <div className="image">
                     <img src={dulce} alt="dulce" />
                 </div>
-                <div className="content">
+                <div className="aContent">
                     <h3>Para aquellas personas emprendedoras</h3>
                     <p>Dulcemprende es una plataforma que te permite comenzar con un
                         emprendimiento del area de dulces, un mercado altamente demandado
@@ -30,7 +32,8 @@ const About = () => {
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+        </div>
         <Footer />
         </>
     )

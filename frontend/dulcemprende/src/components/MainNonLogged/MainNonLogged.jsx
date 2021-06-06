@@ -8,7 +8,7 @@ import Footer from "../Footer/Footer";
 const MainNonLogged = () => {
     return (
               <>
-        <section className="home sect">
+        <article className="home sect">
             <div className="content">
               <h3>¿Qué esperas para <span>emprender?</span></h3>
               <a href="#emprende" className="abtn">Emprende!</a>
@@ -16,8 +16,8 @@ const MainNonLogged = () => {
             <div className="image">
               <img src={mano} alt="mano" />
             </div>
-          </section>
-          <section className="features" id="features">
+          </article>
+          <article className="features" id="features">
               <h1 className="heading" id="emprende">Disfruta de lo que ofrede Dulcemprende</h1>
 
               <div className="box-container">
@@ -43,7 +43,7 @@ const MainNonLogged = () => {
                   </p>
                 </div>
               </div>
-          </section>
+          </article>
           <Footer />
 
       </>

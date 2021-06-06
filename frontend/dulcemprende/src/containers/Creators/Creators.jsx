@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import './style.css'
+import { AboutCreators } from '../../components/AboutCreators/AboutCreators'
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
-import About from '../../components/About/About';
 
 
-const AboutPage = () => {
-    let element = "Sobre Dulcemprende";
+const Creators = () => {
+    let element = "Sobre los creadores";
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const openSidebar = () => {
       setSidebarOpen(true);
@@ -16,24 +15,24 @@ const AboutPage = () => {
       setSidebarOpen(false);
     };
     return (
-
         <div className="container">
             <Navbar
             sidebarOpen={setSidebarOpen}
             openSidebar={openSidebar}
             element={element}
             />
-
+    
             <main>
-                <About />
+                <AboutCreators />
             </main>
-            <Sidebar
+        <Sidebar
             sidebarOpen={sidebarOpen}
             closeSidebar={closeSidebar}
             element={element}
-            />
-      </div>
-    )
+        />
+    </div>
+  );
+    
 }
 
-export default AboutPage
+export default Creators

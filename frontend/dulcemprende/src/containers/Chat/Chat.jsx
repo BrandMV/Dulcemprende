@@ -44,9 +44,9 @@ const Chat = () => {
     <main>
     <div className="App">
 
-            <section>
+            <article>
                 {auth.authenticate ? <ChatComponent /> : <h1>Debes de tener una cuenta para comenzar a chatear!</h1> }
-            </section>
+            </article>
         </div>
     </main>
     <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} element={element} />

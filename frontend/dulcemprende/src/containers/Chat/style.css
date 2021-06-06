@@ -29,7 +29,7 @@ main {
     font-size: 30px;
   }
 
-  .App section {
+  .App article {
     display: flex;
     flex-direction: column;
     justify-content: center;

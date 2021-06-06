@@ -1,23 +1,4 @@
-section{
-    min-width: 100vh;
-    padding: 0 9%;
-    padding-top: 7.5rem;
-    display: block;
-}
 
-main {
-    background-color: #f3f4f6;
-    grid-area: main;
-    overflow-y: auto;
-}
-.home{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: url(../../images/svg.png) no-repeat;
-    background-size: cover;
-    background-position: center;
-}
 .abtn{
     display: inline-block;
     margin-top: 1rem;
@@ -33,36 +14,7 @@ main {
 .abtn:hover{
     transform: scale(1.1);
 }
-.home .image img{
-    width: 20vw;
-    animation: float 3s linear infinite;
-}
 
-@keyframes float {
-    0%, 100%{
-        transform: translateY(0rem);
-    }
-    50%{
-        transform: translateY(-3.5rem);
-    }
-}
-.home .content h3{
-    font-size: 5.5rem;
-    color: #333;
-    text-transform: uppercase;
-}
-.home .content h3 span{
-    color: #729d39;
-    text-decoration: uppercase;
-}
-.home .content p{
-    font-size: 1.7rem;
-    color: #666;
-    text-align: uppercase;
-}
-.mainDiv{
-    border: 1px solid red;
-}
 .heading{
     text-align: center;
     background: #729d39 ;
@@ -77,6 +29,7 @@ main {
     background: url(../../images/about.png) no-repeat;
     background-size: cover;
     background-position: center;
+    transition: .2s ease-in-out;
 }
 .about .column{
     display: flex;
@@ -91,92 +44,42 @@ main {
     height: 15rem;
     width: 100%;
 }
-.about .column .content{
+.about .column .aContent{
     flex: 1 1 40rem;
 }
-.about .column .content h3{
+.about .column .aContent h3{
     font-size: 3rem;
     color: #666;
 }
-.about .column .content p{
+.about .column .aContent p{
     font-size: 1.5rem;
     color: #666;
     padding: 1rem 0;
 }
 
-.about .column .content .buttons a:last-child{
+.about .column .aContent .buttons a:last-child{
     margin-left: 2rem;
     margin-bottom: 2rem;
 }
-
-@media (max-width: 991px){
-    section{
-        padding: 0 3%;
-        padding-top: 7.5rem;
-    }
-
-}
-
-@media (max-width: 768px){
-    .home{
-        flex-flow: column-reverse;
-
-    }
-    .home .image img {
-        width: 100%;
-    }
-    .home .content h3{
-        font-size: 3.6rem;
-    }
-    .home .content p{
-        font-size: 1.5rem;
-    }
-    .mainDiv{
-        display:block;
-    }
-    .about{
-        background-position: right;
-    }
-
-}
-
-@media (max-width: 450px){
-    .about .column .content .buttons a{
-        width: 100%;
-        text-align: center;
-    }
-    .about .column .content .buttons a:last-child{
-        margin: 1rem 0;
-    }
-}
-.features .box-container{
+.sAbout{
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-}
-.features .box-container .box{
-    flex: 1 1 30rem;
-    background: white;
-    border-radius: .5rem;
-    border: .1rem solir rgba(0,0,0,.2);
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
-    margin: 1.5rem;
-    padding: 3rem 2rem;
-    text-align: center;
-    transition: .2s linear;
-}
-.features .box-container .box img{
-    height: 15rem;
+    flex-direction: column;
 }
 
-.features .box-container .box h3{
-    font-size: 2rem;
-    color: #333;
-    padding-top: 1rem;
+@media only screen and (max-width: 500px){
+
+    .heading{
+        text-align: center;
+        font-size: 2rem;
+        margin: auto;
+    }
+
+    .aContent p{
+        font-size: 0.2rem;
+        text-align: justify;
+    }
 }
-.features .box-container .box p{
-    font-size: 1.3rem;
-    color: #666;
-    padding: 1rem 0;
-}
+
+

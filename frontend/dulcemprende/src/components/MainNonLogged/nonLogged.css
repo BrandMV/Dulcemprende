@@ -1,15 +1,10 @@
-section{
+article{
     min-width: 100vh;
     padding: 0 9%;
     padding-top: 7.5rem;
     display: block;
 }
 
-main {
-    background-color: #f3f4f6;
-    grid-area: main;
-    overflow-y: auto;
-}
 .home{
     display: flex;
     align-items: center;
@@ -34,7 +29,7 @@ main {
     transform: scale(1.1);
 }
 .home .image img{
-    width: 20vw;
+    width: 10rem;
     animation: float 3s linear infinite;
 }
 
@@ -73,35 +68,6 @@ main {
     text-transform: uppercase;
     padding: 1rem;
 }
-
-@media (max-width: 991px){
-    section{
-        padding: 0 3%;
-        padding-top: 7.5rem;
-    }
-
-}
-
-@media (max-width: 768px){
-    .home{
-        flex-flow: column-reverse;
-
-    }
-    .home .image img {
-        width: 100%;
-    }
-    .home .content h3{
-        font-size: 3.6rem;
-    }
-    .mainDiv{
-        display:block;
-    }
-
-}
-
-@media (max-width: 450px){
-  
-}
 .features .box-container{
     display: flex;
     justify-content: center;
@@ -132,4 +98,33 @@ main {
     font-size: 1.3rem;
     color: #666;
     padding: 1rem 0;
+}
+
+@media (max-width: 991px){
+    article{
+        padding: 0 3%;
+        padding-top: 7.5rem;
+    }
+
+}
+
+@media (max-width: 768px){
+    .home{
+        flex-flow: column-reverse;
+
+    }
+    .home .image img {
+        width: 100%;
+    }
+    .home .content h3{
+        font-size: 3.6rem;
+    }
+    .mainDiv{
+        display:block;
+    }
+
+}
+
+@media (max-width: 450px){
+  
 }
