@@ -36,7 +36,7 @@ exports.addAddress = (req, res) => {
       });
     }
   } else {
-    res.status(400).json({ error: "Params address required" });
+    res.status(400).json({ error: "Los parametros son requeridos" });
   }
 };
 

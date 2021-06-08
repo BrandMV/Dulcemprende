@@ -18,14 +18,14 @@ const ProductStore = (props) => {
 
   return (
     <>
-       <div className="row row-2">
+       {/* <div className="row row-2">
                 <h2>Productos</h2>
                 <select>
                   <option>Por defecto</option>
                   <option>Ordenar de mayor a menos precio</option>
                   <option>Ordenar de menor a mayor precio</option>
                 </select>
-      </div>
+      </div> */}
       {Object.keys(product.productsByPrice).map((key, index) => {
         return (
           <div className="small-container" key={index}>

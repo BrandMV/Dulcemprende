@@ -13,7 +13,7 @@ exports.signup = (req, res) => {
   User.findOne({ email: req.body.email }).exec(async (error, user) => {
     if (user)
       return res.status(400).json({
-        error: "User already registered",
+        error: "Ya te has registrado",
       });
 
     const { firstName, lastName, email, password} = req.body;
@@ -30,7 +30,7 @@ exports.signup = (req, res) => {
     _user.save((error, user) => {
       if (error) {
         return res.status(400).json({
-          message: "Something went wrong",
+          message: "Algo salió mal",
         });
       }
 
@@ -65,11 +65,11 @@ exports.signin = (req, res) => {
         });
       } else {
         return res.status(400).json({
-          message: "Something went wrong",
+          message: "Algo salió mal",
         });
       }
     } else {
-      return res.status(400).json({ message: "Something went wrong" });
+      return res.status(400).json({ message: "Algo salió mal" });
     }
   });
 };

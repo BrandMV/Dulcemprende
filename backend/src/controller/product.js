@@ -54,25 +54,25 @@ exports.getProductsBySlug = (req, res) => {
               res.status(200).json({
                 products,
                 priceRange: {
-                  under5k: 5000,
-                  under10k: 10000,
-                  under15k: 15000,
-                  under20k: 20000,
-                  under30k: 30000,
+                  under5k: 20,
+                  under10k: 40,
+                  under15k: 60,
+                  under20k: 80,
+                  under30k: 100,
                 },
                 productsByPrice: {
-                  under5k: products.filter((product) => product.price <= 5000),
+                  under5k: products.filter((product) => product.price <= 20),
                   under10k: products.filter(
-                    (product) => product.price > 5000 && product.price <= 10000
+                    (product) => product.price > 20 && product.price <= 40
                   ),
                   under15k: products.filter(
-                    (product) => product.price > 10000 && product.price <= 15000
+                    (product) => product.price > 40 && product.price <= 60
                   ),
                   under20k: products.filter(
-                    (product) => product.price > 15000 && product.price <= 20000
+                    (product) => product.price > 60 && product.price <= 80
                   ),
                   under30k: products.filter(
-                    (product) => product.price > 20000 && product.price <= 30000
+                    (product) => product.price > 80 && product.price <= 100
                   ),
                 },
               });
@@ -95,7 +95,7 @@ exports.getProductDetailsById = (req, res) => {
       }
     });
   } else {
-    return res.status(400).json({ error: "Params required" });
+    return res.status(400).json({ error: "Parametros requeridos" });
   }
 };
 
@@ -110,7 +110,7 @@ exports.deleteProductById = (req, res) => {
       }
     });
   } else {
-    res.status(400).json({ error: "Params required" });
+    res.status(400).json({ error: "Parametros requeridos" });
   }
 };
 
